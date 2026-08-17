@@ -1,7 +1,14 @@
 "use client";
 
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useRef } from "react";
 import { PERU_DEPARTMENTS } from "../data/peru-locations";
+import {
+  trackViewContent,
+  trackAddToCart,
+  trackInitiateCheckout,
+  trackPurchase,
+  trackContact,
+} from "../lib/meta-pixel";
 import {
   CartIcon,
   CheckIcon,
@@ -89,14 +96,33 @@ const PURCHASE_EVENTS: {
   { name: "Roberto Chávez", city: "Iquitos", pack: 1, packLabel: "1 Pack (30 días)", time: "hace 26 min", initials: "RC", image: "/perfil/vicente.jpg" }
 ];
 
+// Identificadores de contenido para el Meta Pixel
+const PACK_CONTENT_IDS: Record<number, string> = {
+  1: "PROSTACARE-30D",
+  2: "PROSTACARE-60D",
+  3: "PROSTACARE-90D",
+};
+
 export default function Home() {
   // Stock counter urgency state
   const [stock, setStock] = useState(14);
   const [stockAnimated, setStockAnimated] = useState(false);
+  // Controla si ViewContent ya se disparó
+  const viewContentFired = useRef(false);
 
   // Notificaciones de compra en vivo: idle → visible (4.5s) → leaving (0.35s) → idle
   const [notifIndex, setNotifIndex] = useState(0);
   const [notifState, setNotifState] = useState<"idle" | "visible" | "leaving">("idle");
+
+  // Disparar ViewContent al cargar la página del producto
+  useEffect(() => {
+    if (!viewContentFired.current) {
+      viewContentFired.current = true;
+      const pack = PACK_OPTIONS.find((p) => p.id === 2) || PACK_OPTIONS[0];
+      trackViewContent(PACK_CONTENT_IDS[2], pack.title, pack.basePrice);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     let t1: ReturnType<typeof setTimeout>;
@@ -207,11 +233,17 @@ export default function Home() {
     }
   };
 
-  // Open checkout modal from any CTA button
+  // Open checkout modal from any CTA button + dispara eventos pixel
   const openCheckout = (packIdChoice?: number) => {
+    const targetPackId = packIdChoice || selectedPackId;
     if (packIdChoice) {
       setSelectedPackId(packIdChoice);
     }
+    // AddToCart al seleccionar pack y abrir modal
+    const pack = PACK_OPTIONS.find((p) => p.id === targetPackId) || PACK_OPTIONS[1];
+    trackAddToCart(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
+    // InitiateCheckout al abrir el modal
+    trackInitiateCheckout(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
     setIsCheckoutOpen(true);
   };
 
@@ -268,6 +300,13 @@ export default function Home() {
 
       setStatus("success");
       setMessage(data.message || "¡Felicidades! Tu pedido ha sido registrado con éxito. Te llamaremos por teléfono para coordinar la entrega.");
+      // Purchase event — el evento más importante para la optimización de Meta
+      trackPurchase(
+        PACK_CONTENT_IDS[activePack.id] || "PROSTACARE-30D",
+        activePack.title,
+        finalPrice,
+        activePack.quantity
+      );
 
       // Envía el pedido automáticamente al WhatsApp del comercio
       const orderMsg = [
@@ -330,12 +369,14 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Escríbenos por WhatsApp"
+            onClick={() => trackContact("WhatsApp")}
             className="ml-auto flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-md shadow-emerald-500/40 transition hover:bg-emerald-600 active:scale-95"
           >
             <WhatsAppIcon className="h-5 w-5 sm:h-6 sm:w-6" />
           </a>
         </div>
       </header>
+
 
 
       {/* SECCIÓN 1 HERO (Responsivo: texto izq. + imagen der. en todas las pantallas) */}
@@ -350,9 +391,9 @@ export default function Home() {
               
               {/* Título Principal: en móvil se achica para mantener la vista lateral */}
               <h1 className="animate-fadeInUp text-[15px] xs:text-base sm:text-2xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-blue-950 leading-[1.06]">
-                CUIDA TU <span className="text-emerald-600">PRÓSTATA</span><br />
-                Y RECUPERA TU <br className="sm:hidden" />BIENESTAR<br />
-                NATURALMENTE
+                FÓRMULA NATURAL <span className="text-emerald-600">PARA EL</span><br />
+                BIENESTAR <br className="sm:hidden" />MASCULINO<br />
+                DE ACCIÓN DUAL
               </h1>
 
               {/* 4 Iconos Circulares Verdes en Fila Ultra Compacta */}
@@ -443,7 +484,7 @@ export default function Home() {
 
             {/* Título Principal */}
             <h2 className="animate-fadeInUp text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-[1.08]" style={{ animationDelay: "100ms" }}>
-              ¿Harto de Levantarte al Baño <span className="text-emerald-400">4 Veces por la Madrugada?</span>
+              Apoyo Natural para <span className="text-emerald-400">Noches de Descanso Completo</span>
             </h2>
 
             {/* CTA con latido suave */}
@@ -483,18 +524,18 @@ export default function Home() {
       <section className="bg-slate-50 py-8 sm:py-16 border-y border-slate-200">
         <div className="mx-auto max-w-5xl px-3.5 sm:px-6 text-center">
           <span className="text-[10px] xs:text-xs font-extrabold tracking-widest text-red-600 uppercase bg-red-100 px-2 py-1 rounded-md">
-            ¿RECONOCES ESTOS SÍNTOMAS?
+            SEÑALES COMUNES DEL DESGASTE NATURAL
           </span>
           <h2 className="mt-2.5 text-lg xs:text-xl sm:text-3xl font-black tracking-tight text-slate-950">
-            Si tienes más de 45 años, seguro reconoces estos síntomas:
+            Después de los 45, el cuerpo puede experimentar cambios como:
           </h2>
 
           <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4 text-left">
             {[
-              { img: "/Ganas%20urgentes%20(2).png", text: "Ganas urgentes de orinar que no aguantan." },
-              { img: "/Flujo%20d%C3%A9bil.png", text: "Flujo débil, goteo molesto o sensación de no vaciar bien." },
-              { img: "/Ardor%20y%20dolor.png", text: "Ardor o dolor pélvico." },
-              { img: "/Cansancio.png", text: "Cansancio crónico por no poder dormir de corrido." }
+              { img: "/Ganas%20urgentes%20(2).png", text: "Frecuencia urinaria que puede interrumpir el descanso nocturno." },
+              { img: "/Flujo%20d%C3%A9bil.png", text: "Cambios en el flujo urinario que generan incomodidad." },
+              { img: "/Ardor%20y%20dolor.png", text: "Molestias en la zona baja que afectan la comodidad diaria." },
+              { img: "/Cansancio.png", text: "Fatiga derivada de interrupciones del descanso nocturno." }
             ].map((item, idx) => (
               <div
                 key={idx}
@@ -520,7 +561,7 @@ export default function Home() {
 
           <div className="mt-6 flex items-center justify-center gap-2.5 rounded-2xl bg-blue-950 p-3.5 sm:p-4 text-white text-xs sm:text-base font-bold">
             <LightbulbIcon className="h-5 w-5 sm:h-6 sm:w-6 shrink-0 text-amber-300" />
-            <span>No vivas con estas molestias. La fórmula dual Prostacare te ayuda a recuperar tu ritmo diario.</span>
+            <span>La fórmula dual Prostacare fue diseñada para apoyar el bienestar del tracto urinario y el descanso masculino.</span>
           </div>
         </div>
       </section>
@@ -657,7 +698,7 @@ export default function Home() {
           </div>
 
           <p className="mt-5 text-center text-[10px] sm:text-[11px] leading-relaxed text-slate-500">
-            * Reseñas ilustrativas basadas en experiencias típicas de clientes (dramatizaciones). Los resultados pueden variar de persona a persona.
+            * Los testimonios representan experiencias individuales de clientes. Los resultados pueden variar de persona a persona. Este producto no diagnostica, trata, cura ni previene ninguna enfermedad. Es un complemento alimenticio de venta libre.
           </p>
         </div>
       </section>
@@ -730,10 +771,13 @@ export default function Home() {
       <footer className="bg-slate-950 text-slate-400 py-6 sm:py-8 px-4 text-center text-[11px] sm:text-xs space-y-3 border-t border-slate-800">
         <div className="max-w-4xl mx-auto space-y-2">
           <p className="text-slate-400 leading-relaxed">
-            <strong>DESCARGO DE RESPONSABILIDAD:</strong> Este producto es un complemento alimenticio natural y no sustituye la consulta médica. Los resultados pueden variar de persona a persona. Este sitio no es parte del sitio web de Facebook ni de Meta Inc.
+            <strong>DESCARGO DE RESPONSABILIDAD:</strong> Este producto es un complemento alimenticio natural de venta libre y no sustituye la consulta médica profesional. No diagnostica, trata, cura ni previene ninguna enfermedad. Los resultados individuales pueden variar.
           </p>
-          <p className="text-slate-500 font-semibold">
-            © {new Date().getFullYear()} Prostacare Perú · Todos los derechos reservados.
+          <p className="text-slate-500 leading-relaxed">
+            Este sitio web no es parte de Facebook ni está respaldado por Meta, Inc. Facebook es una marca registrada de Meta, Inc.
+          </p>
+          <p className="text-slate-600 font-semibold">
+            © {new Date().getFullYear()} ImportHealth Perú · Todos los derechos reservados.
           </p>
         </div>
       </footer>

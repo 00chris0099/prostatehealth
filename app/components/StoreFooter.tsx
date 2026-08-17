@@ -96,18 +96,43 @@ export default function StoreFooter() {
           </ul>
         </div>
 
-        {/* Col 3: Legal */}
+        {/* Col 3: Legal — todos los links apuntan a páginas reales (requisito Meta + Indecopi) */}
         <div className="store-footer-col">
           <h4 className="store-footer-col-title">Legal</h4>
           <ul className="store-footer-links">
             <li>
-              <span className="store-footer-link-text">Política de Privacidad</span>
+              <Link href="/privacidad" className="store-footer-link">
+                <ShieldCheckIcon className="h-3.5 w-3.5" />
+                Política de Privacidad
+              </Link>
             </li>
             <li>
-              <span className="store-footer-link-text">Términos y Condiciones</span>
+              <Link href="/terminos" className="store-footer-link">
+                <ShieldCheckIcon className="h-3.5 w-3.5" />
+                Términos y Condiciones
+              </Link>
             </li>
             <li>
-              <span className="store-footer-link-text">Política de Reembolso</span>
+              <Link href="/reembolsos" className="store-footer-link">
+                <ShieldCheckIcon className="h-3.5 w-3.5" />
+                Política de Reembolso
+              </Link>
+            </li>
+            <li>
+              <Link href="/envios" className="store-footer-link">
+                <ShieldCheckIcon className="h-3.5 w-3.5" />
+                Política de Envíos
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/libro-reclamaciones"
+                className="store-footer-link"
+                style={{ color: "var(--brand-gold)" }}
+              >
+                <span className="text-sm">📖</span>
+                Libro de Reclamaciones
+              </Link>
             </li>
           </ul>
         </div>
@@ -153,6 +178,10 @@ export default function StoreFooter() {
         </p>
         <p className="store-footer-disclaimer">
           Productos de complementación natural. No sustituyen consulta médica. Resultados pueden variar.
+        </p>
+        {/* Disclaimer obligatorio para anuncios de Meta */}
+        <p className="store-footer-disclaimer" style={{ marginTop: "4px", fontSize: "10px", opacity: 0.6 }}>
+          Este sitio web no es parte de Facebook ni está respaldado por Meta, Inc. Facebook es una marca registrada de Meta, Inc.
         </p>
       </div>
     </footer>
