@@ -423,17 +423,17 @@ export default function Home() {
 
               {/* CTA (solo escritorio: dentro de la columna, como en la vista web) */}
               <div className="animate-fadeInUp hidden md:flex flex-col items-start gap-2.5 pt-1" style={{ animationDelay: "300ms" }}>
-                {/* BANNER GIGANTE: PAGA EN CASA AL RECIBIR */}
-                <div className="animate-fadeInUp w-full rounded-xl bg-emerald-600 px-4 py-3 sm:px-6 sm:py-4 shadow-lg shadow-emerald-600/30">
-                  <p className="text-center text-sm sm:text-xl md:text-2xl font-black uppercase tracking-tight text-white leading-tight">
-                    🛵 PAGA EN CASA AL RECIBIR
+                {/* AVISO: PAGA EN CASA AL RECIBIR — estilo notificación, NO parece botón */}
+                <div className="animate-fadeInUp w-full rounded-lg border-2 border-dashed border-emerald-400 bg-emerald-50 px-4 py-2.5">
+                  <p className="text-center text-xs sm:text-sm font-black uppercase tracking-wide text-emerald-800 leading-tight">
+                    ✅ PAGA EN CASA AL RECIBIR
                   </p>
-                  <p className="text-center text-[10px] sm:text-xs font-bold text-emerald-100 mt-0.5">
+                  <p className="text-center text-[10px] sm:text-[11px] font-semibold text-emerald-600 mt-0.5">
                     No pagas nada por adelantado — solo cuando el repartidor te entregue el paquete
                   </p>
                 </div>
 
-                <button onClick={() => openCheckout(2)} className="btn-primary-cta">
+                <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat">
                   <CartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
                   PEDIR AHORA — PAGO EN CASA (DESDE S/ 124)
                 </button>
@@ -467,17 +467,17 @@ export default function Home() {
 
           {/* CTA (móvil): botón abajo a lo ancho, debajo de las dos columnas */}
           <div className="animate-fadeInUp mt-4 flex flex-col items-center gap-2.5 md:hidden" style={{ animationDelay: "300ms" }}>
-            {/* BANNER GIGANTE: PAGA EN CASA AL RECIBIR (móvil) */}
-            <div className="animate-fadeInUp w-full rounded-xl bg-emerald-600 px-4 py-3 shadow-lg shadow-emerald-600/30">
-              <p className="text-center text-base sm:text-lg font-black uppercase tracking-tight text-white leading-tight">
-                🛵 PAGA EN CASA AL RECIBIR
+            {/* AVISO: PAGA EN CASA AL RECIBIR — estilo notificación, NO parece botón */}
+            <div className="animate-fadeInUp w-full rounded-lg border-2 border-dashed border-emerald-400 bg-emerald-50 px-4 py-2.5">
+              <p className="text-center text-sm font-black uppercase tracking-wide text-emerald-800 leading-tight">
+                ✅ PAGA EN CASA AL RECIBIR
               </p>
-              <p className="text-center text-[10px] font-bold text-emerald-100 mt-0.5">
+              <p className="text-center text-[10px] font-semibold text-emerald-600 mt-0.5">
                 No pagas nada por adelantado — solo cuando el repartidor te entregue
               </p>
             </div>
 
-            <button onClick={() => openCheckout(2)} className="btn-primary-cta">
+            <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat">
               <CartIcon className="h-5 w-5" />
               PEDIR AHORA — PAGO EN CASA (DESDE S/ 124)
             </button>
@@ -776,8 +776,8 @@ export default function Home() {
 
             {/* CTA Button */}
             <div className="pt-1">
-              <button onClick={() => openCheckout(2)} className="btn-primary-cta">
-                <CartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+              <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat">
+                <CartIcon className="h-5 w-5 sm:h-6 sm:h-6" />
                 SELECCIONAR PAQUETE Y PEDIR (DESDE S/ 124)
               </button>
             </div>
@@ -1133,12 +1133,12 @@ export default function Home() {
                   </div>
                 )}
 
-                {/* Banner de PAGO EN CASA encima del botón */}
-                <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-2.5 text-center">
-                  <p className="text-sm sm:text-base font-black uppercase text-emerald-700 tracking-tight">
-                    🛵 PAGA EN CASA AL RECIBIR
+                {/* Banner de PAGO EN CASA encima del botón — estilo notificación, NO parece botón */}
+                <div className="rounded-lg border-2 border-dashed border-emerald-400 bg-emerald-50 px-4 py-2.5 text-center">
+                  <p className="text-sm sm:text-base font-black uppercase text-emerald-800 tracking-tight">
+                    ✅ PAGA EN CASA AL RECIBIR
                   </p>
-                  <p className="text-[10px] sm:text-xs font-bold text-emerald-600">
+                  <p className="text-[10px] sm:text-xs font-semibold text-emerald-600">
                     No pagas nada hoy — solo cuando el repartidor llegue a tu puerta
                   </p>
                 </div>
