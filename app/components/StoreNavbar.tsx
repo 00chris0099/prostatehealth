@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { trackContact } from "../lib/meta-pixel";
 import {
   HomeIcon,
   PackageIcon,
@@ -26,6 +27,11 @@ const NAV_LINKS = [
 export default function StoreNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+
+  const handleWhatsAppClick = () => {
+    trackContact("WhatsApp Navbar");
+    setMobileOpen(false);
+  };
 
   return (
     <>
@@ -74,6 +80,7 @@ export default function StoreNavbar() {
               rel="noopener noreferrer"
               aria-label="Escríbenos por WhatsApp"
               className="store-whatsapp-btn"
+              onClick={handleWhatsAppClick}
             >
               <WhatsAppIcon className="h-5 w-5" />
             </a>
@@ -129,7 +136,7 @@ export default function StoreNavbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="store-mobile-whatsapp"
-                onClick={() => setMobileOpen(false)}
+                onClick={handleWhatsAppClick}
               >
                 <WhatsAppIcon className="h-5 w-5 shrink-0" />
                 Escribir por WhatsApp

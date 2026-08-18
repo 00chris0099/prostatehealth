@@ -6,6 +6,8 @@ import {
   trackViewContent,
   trackAddToCart,
   trackInitiateCheckout,
+  trackAddPaymentInfo,
+  trackLead,
   trackPurchase,
   trackContact,
 } from "../lib/meta-pixel";
@@ -239,11 +241,11 @@ export default function Home() {
     if (packIdChoice) {
       setSelectedPackId(packIdChoice);
     }
-    // AddToCart al seleccionar pack y abrir modal
+    // AddToCart + InitiateCheckout + AddPaymentInfo al abrir modal
     const pack = PACK_OPTIONS.find((p) => p.id === targetPackId) || PACK_OPTIONS[1];
     trackAddToCart(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
-    // InitiateCheckout al abrir el modal
     trackInitiateCheckout(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
+    trackAddPaymentInfo(PACK_CONTENT_IDS[targetPackId], pack.basePrice);
     setIsCheckoutOpen(true);
   };
 
@@ -300,7 +302,9 @@ export default function Home() {
 
       setStatus("success");
       setMessage(data.message || "¡Felicidades! Tu pedido ha sido registrado con éxito. Te llamaremos por teléfono para coordinar la entrega.");
-      // Purchase event — el evento más importante para la optimización de Meta
+      
+      // Meta Pixel — Eventos Lead & Purchase para máxima conversión en campañas de Meta Ads
+      trackLead("Formulario COD Completado", finalPrice);
       trackPurchase(
         PACK_CONTENT_IDS[activePack.id] || "PROSTACARE-30D",
         activePack.title,

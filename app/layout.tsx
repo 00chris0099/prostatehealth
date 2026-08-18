@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
 import MetaPixel from "./components/MetaPixel";
 import CookieConsent from "./components/CookieConsent";
 
@@ -17,11 +16,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={manrope.variable}>
-        {/* Meta Pixel Base Code — inyectado desde el Server Component para máxima fiabilidad */}
-        <Script
-          id="meta-pixel"
-          strategy="afterInteractive"
+      <head>
+        {/* Meta Pixel Base Code — Inyectado síncronamente en HEAD */}
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)
@@ -37,7 +34,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             `,
           }}
         />
-        {/* MetaPixel: solo maneja el tracking de rutas en navegación SPA */}
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
+            alt=""
+          />
+        </noscript>
+      </head>
+      <body className={manrope.variable}>
+        {/* MetaPixel: Maneja el tracking de rutas en navegación SPA */}
         <MetaPixel />
         {children}
         <CookieConsent />

@@ -1,37 +1,28 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
-
-const PIXEL_ID = "1600215718203667";
+import { useEffect, useRef } from "react";
 
 /**
  * MetaPixel — Client Component
- * Solo dispara PageView adicionales en navegación SPA (cambios de ruta).
- * La inicialización del pixel (fbq init + primer PageView) se hace en layout.tsx
- * para garantizar que funcione en TODAS las páginas, incluida la landing.
+ * Dispara PageView en cambios de ruta SPA.
+ * La inicialización principal (fbq init + primer PageView) se hace en layout.tsx <head>.
  */
 export default function MetaPixel() {
   const pathname = usePathname();
+  const isFirstRender = useRef(true);
 
-  // Dispara PageView en cada cambio de ruta (navegación SPA)
   useEffect(() => {
+    // Evitar duplicar el primer PageView que se dispara desde el <head>
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "PageView");
     }
   }, [pathname]);
 
-  // Noscript fallback para usuarios sin JavaScript
-  return (
-    <noscript>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        height="1"
-        width="1"
-        style={{ display: "none" }}
-        src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`}
-        alt=""
-      />
-    </noscript>
-  );
+  return null;
 }

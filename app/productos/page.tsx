@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import StoreNavbar from "../components/StoreNavbar";
 import StoreFooter from "../components/StoreFooter";
 import { PRODUCTS, CATEGORIES } from "../data/products";
+import { trackViewContent } from "../lib/meta-pixel";
 import {
   StarIcon,
   CartIcon,
@@ -29,6 +31,10 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
 };
 
 export default function ProductosPage() {
+  useEffect(() => {
+    trackViewContent("IMPORTHEALTH-CATALOG", "Catálogo Completo ImportHealth", 124);
+  }, []);
+
   return (
     <div className="store-page">
       <StoreNavbar />

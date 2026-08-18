@@ -1,9 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import StoreNavbar from "./components/StoreNavbar";
 import StoreFooter from "./components/StoreFooter";
 import { PRODUCTS, CATEGORIES, STORE_TESTIMONIALS } from "./data/products";
+import { trackViewContent } from "./lib/meta-pixel";
 import {
   TruckIcon,
   BanknoteIcon,
@@ -38,6 +40,10 @@ const CATEGORY_ICONS: Record<string, React.ElementType> = {
 };
 
 export default function StorePage() {
+  useEffect(() => {
+    trackViewContent("IMPORTHEALTH-HOME", "ImportHealth Tienda Principal", 124);
+  }, []);
+
   return (
     <div className="store-page">
       <StoreNavbar />
