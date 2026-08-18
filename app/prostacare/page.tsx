@@ -241,11 +241,10 @@ export default function Home() {
     if (packIdChoice) {
       setSelectedPackId(packIdChoice);
     }
-    // AddToCart + InitiateCheckout + AddPaymentInfo al abrir modal
+    // Meta Pixel: AddToCart cuando selecciona un pack, InitiateCheckout al abrir modal
     const pack = PACK_OPTIONS.find((p) => p.id === targetPackId) || PACK_OPTIONS[1];
     trackAddToCart(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
     trackInitiateCheckout(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
-    trackAddPaymentInfo(PACK_CONTENT_IDS[targetPackId], pack.basePrice);
     setIsCheckoutOpen(true);
   };
 
@@ -303,8 +302,9 @@ export default function Home() {
       setStatus("success");
       setMessage(data.message || "¡Felicidades! Tu pedido ha sido registrado con éxito. Te llamaremos por teléfono para coordinar la entrega.");
       
-      // Meta Pixel — Eventos Lead & Purchase para máxima conversión en campañas de Meta Ads
+      // Meta Pixel — Eventos Lead, AddPaymentInfo & Purchase para máxima conversión en campañas de Meta Ads
       trackLead("Formulario COD Completado", finalPrice);
+      trackAddPaymentInfo(PACK_CONTENT_IDS[activePack.id] || "PROSTACARE-30D", finalPrice);
       trackPurchase(
         PACK_CONTENT_IDS[activePack.id] || "PROSTACARE-30D",
         activePack.title,
@@ -342,15 +342,15 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-slate-900 selection:bg-emerald-200 selection:text-emerald-950 pb-24 sm:pb-0 font-sans overflow-x-clip">
       
-      {/* Cintillo azul (fijo arriba, siempre visible al bajar) */}
+      {/* Cintillo verde (fijo arriba, siempre visible al bajar) — PAGO CONTRA ENTREGA */}
       <div className="sticky top-0 z-40">
-        <div className="bg-blue-950 text-white">
+        <div className="bg-emerald-600 text-white">
           <div className="mx-auto flex max-w-6xl items-center justify-center gap-1.5 px-2.5 py-1.5 sm:gap-3 sm:px-6 sm:py-2">
-            <SirenIcon className="h-3.5 w-3.5 shrink-0 text-red-500 sm:h-4 sm:w-4" />
+            <SirenIcon className="h-3.5 w-3.5 shrink-0 text-white sm:h-4 sm:w-4" />
             <p className="text-center text-[9px] xs:text-[10px] sm:text-xs font-extrabold uppercase tracking-wide leading-tight">
               ENVÍO GRATIS A TODO EL PERÚ — PAGA EN CASA AL RECIBIR
             </p>
-            <SirenIcon className="h-3.5 w-3.5 shrink-0 text-red-500 sm:h-4 sm:w-4" />
+            <SirenIcon className="h-3.5 w-3.5 shrink-0 text-white sm:h-4 sm:w-4" />
           </div>
         </div>
       </div>
@@ -423,16 +423,26 @@ export default function Home() {
 
               {/* CTA (solo escritorio: dentro de la columna, como en la vista web) */}
               <div className="animate-fadeInUp hidden md:flex flex-col items-start gap-2.5 pt-1" style={{ animationDelay: "300ms" }}>
+                {/* BANNER GIGANTE: PAGA EN CASA AL RECIBIR */}
+                <div className="animate-fadeInUp w-full rounded-xl bg-emerald-600 px-4 py-3 sm:px-6 sm:py-4 shadow-lg shadow-emerald-600/30">
+                  <p className="text-center text-sm sm:text-xl md:text-2xl font-black uppercase tracking-tight text-white leading-tight">
+                    🛵 PAGA EN CASA AL RECIBIR
+                  </p>
+                  <p className="text-center text-[10px] sm:text-xs font-bold text-emerald-100 mt-0.5">
+                    No pagas nada por adelantado — solo cuando el repartidor te entregue el paquete
+                  </p>
+                </div>
+
                 <button onClick={() => openCheckout(2)} className="btn-primary-cta">
                   <CartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-                  PEDIR CON PAGA EN CASA (DESDE S/ 124)
+                  PEDIR AHORA — PAGO EN CASA (DESDE S/ 124)
                 </button>
 
-                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-800">
+                <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-white">
                     <CheckIcon className="h-3 w-3" strokeWidth={3} />
                   </span>
-                  <span>PAGO EN CASA AL RECIBIR EL PAQUETE</span>
+                  <span>Sin tarjeta. Sin transferencia. Solo cash al recibir.</span>
                 </div>
               </div>
 
@@ -457,16 +467,26 @@ export default function Home() {
 
           {/* CTA (móvil): botón abajo a lo ancho, debajo de las dos columnas */}
           <div className="animate-fadeInUp mt-4 flex flex-col items-center gap-2.5 md:hidden" style={{ animationDelay: "300ms" }}>
+            {/* BANNER GIGANTE: PAGA EN CASA AL RECIBIR (móvil) */}
+            <div className="animate-fadeInUp w-full rounded-xl bg-emerald-600 px-4 py-3 shadow-lg shadow-emerald-600/30">
+              <p className="text-center text-base sm:text-lg font-black uppercase tracking-tight text-white leading-tight">
+                🛵 PAGA EN CASA AL RECIBIR
+              </p>
+              <p className="text-center text-[10px] font-bold text-emerald-100 mt-0.5">
+                No pagas nada por adelantado — solo cuando el repartidor te entregue
+              </p>
+            </div>
+
             <button onClick={() => openCheckout(2)} className="btn-primary-cta">
               <CartIcon className="h-5 w-5" />
-              PEDIR CON PAGA EN CASA (DESDE S/ 124)
+              PEDIR AHORA — PAGO EN CASA (DESDE S/ 124)
             </button>
 
-            <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-800">
+            <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-700">
               <span className="flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 text-white">
                 <CheckIcon className="h-2.5 w-2.5" strokeWidth={3} />
               </span>
-              <span>PAGO EN CASA AL RECIBIR EL PAQUETE</span>
+              <span>Sin tarjeta. Sin transferencia. Solo cash al recibir.</span>
             </div>
           </div>
 
@@ -836,10 +856,10 @@ export default function Home() {
       )}
 
       {/* STICKY BOTTOM MOBILE BAR (Siempre visible en celular) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-blue-950/95 backdrop-blur-md p-2.5 border-t-2 border-emerald-500 shadow-2xl flex items-center justify-between gap-2">
+      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-emerald-600/95 backdrop-blur-md p-2.5 border-t-2 border-white shadow-2xl flex items-center justify-between gap-2">
         <div className="text-white pl-1">
-          <div className="text-[10px] font-black text-emerald-400">PAGO EN CASA</div>
-          <div className="text-sm font-black text-white">S/ 124 <span className="text-[9px] text-slate-300 font-normal">Envío gratis</span></div>
+          <div className="text-[10px] font-black text-white">🛵 PAGA EN CASA AL RECIBIR</div>
+          <div className="text-sm font-black text-white">S/ 124 <span className="text-[9px] text-emerald-100 font-normal">Envío gratis</span></div>
         </div>
         <button onClick={() => openCheckout(2)} className="btn-primary-cta py-2.5 px-4 text-xs font-black uppercase w-auto">
           <CartIcon className="h-4 w-4" />
@@ -1010,7 +1030,7 @@ export default function Home() {
                   />
                 </div>
 
-                {/* Department, Province, District */}
+                {/* Department, Province, District — SELECTORES DEL PERÚ COMPLETO */}
                 <div className="grid gap-2.5 sm:grid-cols-3">
                   <div>
                     <label className="field-label">Departamento *</label>
@@ -1113,6 +1133,16 @@ export default function Home() {
                   </div>
                 )}
 
+                {/* Banner de PAGO EN CASA encima del botón */}
+                <div className="rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-2.5 text-center">
+                  <p className="text-sm sm:text-base font-black uppercase text-emerald-700 tracking-tight">
+                    🛵 PAGA EN CASA AL RECIBIR
+                  </p>
+                  <p className="text-[10px] sm:text-xs font-bold text-emerald-600">
+                    No pagas nada hoy — solo cuando el repartidor llegue a tu puerta
+                  </p>
+                </div>
+
                 {/* Submit button */}
                 <button
                   type="submit"
@@ -1142,6 +1172,31 @@ export default function Home() {
 
           </div>
         </div>
+      )}
+
+      {/* BOTÓN FLOTANTE DE WHATSAPP — Siempre visible, grande, para señores que no confían en formularios */}
+      {!isCheckoutOpen && (
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Escríbenos por WhatsApp para hacer tu pedido"
+          onClick={() => trackContact("WhatsApp")}
+          className="fixed bottom-24 sm:bottom-6 right-3 sm:right-6 z-40 flex items-center gap-2 sm:gap-3 rounded-full bg-[#25D366] px-4 sm:px-5 py-3 sm:py-4 shadow-xl shadow-[#25D366]/40 transition-all duration-200 hover:scale-105 hover:shadow-2xl hover:shadow-[#25D366]/50 active:scale-95 group"
+        >
+          <WhatsAppIcon className="h-7 w-7 sm:h-8 sm:w-8 text-white shrink-0" />
+          <span className="hidden sm:block max-w-[180px] text-left">
+            <span className="block text-[11px] sm:text-xs font-black text-white leading-tight">
+              ¿Dudas?
+            </span>
+            <span className="block text-[10px] sm:text-[11px] font-bold text-white/90 leading-tight">
+              Haz tu pedido por WhatsApp aquí
+            </span>
+          </span>
+          <span className="sm:hidden text-xs font-black text-white">
+            WhatsApp
+          </span>
+        </a>
       )}
 
     </main>

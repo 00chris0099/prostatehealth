@@ -32,6 +32,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Por favor completa todos los campos requeridos (*)." }, { status: 400 });
   }
 
+  const dept = input.department!.trim();
+  const prov = input.province!.trim();
+  const dist = input.district!.trim();
+
   const cleanPhone = input.phone!.replace(/\D/g, "");
   if (!/^9\d{8}$/.test(cleanPhone)) {
     return NextResponse.json({ message: "Ingresa un número de celular peruano válido de 9 dígitos (debe empezar con 9)." }, { status: 400 });
@@ -58,9 +62,9 @@ export async function POST(request: Request) {
       customer: {
         fullName: input.fullName!.trim(),
         phone: `+51${cleanPhone}`,
-        department: input.department!.trim(),
-        province: input.province!.trim(),
-        district: input.district!.trim(),
+        department: dept,
+        province: prov,
+        district: dist,
         address: input.address!.trim(),
         reference: input.reference?.trim() || ""
       },
@@ -101,8 +105,8 @@ export async function POST(request: Request) {
 
   const payload = {
     calculate_costs_and_shiping: true,
-    state: input.department!.trim(),
-    city: `${input.province!.trim()} - ${input.district!.trim()}`,
+    state: dept,
+    city: `${prov} - ${dist}`,
     name,
     surname: lastName.join(" ") || "-",
     dir: fullAddress,
