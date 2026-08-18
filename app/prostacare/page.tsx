@@ -806,41 +806,41 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* NOTIFICACIÓN DE COMPRA EN VIVO (social proof automática) */}
+      {/* NOTIFICACIÓN DE COMPRA EN VIVO (social proof automática) — compacta para no chocar con WhatsApp */}
       {notifState !== "idle" && (
         <div
           role="status"
           aria-live="polite"
           onClick={() => openCheckout(PURCHASE_EVENTS[notifIndex].pack)}
-          className={`fixed bottom-24 sm:bottom-8 left-3 sm:left-6 z-30 w-[272px] sm:w-[300px] cursor-pointer select-none ${
+          className={`fixed bottom-36 sm:bottom-8 left-3 sm:left-6 z-30 w-[220px] sm:w-[260px] cursor-pointer select-none ${
             notifState === "visible" ? "notif-in" : "notif-out pointer-events-none"
           }`}
         >
-          <div className="flex items-center gap-2.5 rounded-2xl border border-slate-200 bg-white/95 backdrop-blur p-2.5 pr-3 shadow-xl shadow-slate-900/10 hover:border-emerald-300 transition-colors">
-            {/* Avatar: foto de perfil (cuando la pases) o iniciales por ahora */}
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/95 backdrop-blur p-2 shadow-lg shadow-slate-900/10 hover:border-emerald-300 transition-colors">
+            {/* Avatar */}
             {PURCHASE_EVENTS[notifIndex].image ? (
               <img
                 src={PURCHASE_EVENTS[notifIndex].image as string}
                 alt=""
-                className="h-10 w-10 shrink-0 rounded-full border-2 border-emerald-200 object-cover"
+                className="h-8 w-8 shrink-0 rounded-full border-2 border-emerald-200 object-cover"
               />
             ) : (
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-black text-white">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-black text-white">
                 {PURCHASE_EVENTS[notifIndex].initials}
               </span>
             )}
 
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[11px] font-black leading-tight text-slate-900">
+              <p className="truncate text-[10px] font-black leading-tight text-slate-900">
                 {PURCHASE_EVENTS[notifIndex].name}{" "}
                 <span className="font-bold text-slate-500">· {PURCHASE_EVENTS[notifIndex].city}</span>
               </p>
-              <p className="truncate text-[10px] font-bold leading-snug text-slate-700">
-                compró el <span className="font-black text-emerald-700">{PURCHASE_EVENTS[notifIndex].packLabel}</span>
+              <p className="truncate text-[9px] font-bold leading-snug text-slate-700">
+                compró <span className="font-black text-emerald-700">{PURCHASE_EVENTS[notifIndex].packLabel}</span>
               </p>
-              <p className="mt-0.5 flex items-center gap-1 text-[9px] font-bold text-slate-400">
+              <p className="mt-0.5 flex items-center gap-1 text-[8px] font-bold text-slate-400">
                 {PURCHASE_EVENTS[notifIndex].time}
-                <CheckIcon className="h-2.5 w-2.5 text-emerald-600" strokeWidth={4} />
+                <CheckIcon className="h-2 w-2 text-emerald-600" strokeWidth={4} />
                 <span>Verificado</span>
               </p>
             </div>
@@ -849,7 +849,7 @@ export default function Home() {
             <img
               src={PACK_OPTIONS.find((p) => p.id === PURCHASE_EVENTS[notifIndex].pack)?.image}
               alt=""
-              className="h-9 w-9 shrink-0 rounded-lg border border-slate-200 bg-white object-contain"
+              className="h-7 w-7 shrink-0 rounded-md border border-slate-200 bg-white object-contain"
             />
           </div>
         </div>
@@ -861,7 +861,7 @@ export default function Home() {
           <div className="text-[10px] font-black text-white">🛵 PAGA EN CASA AL RECIBIR</div>
           <div className="text-sm font-black text-white">S/ 124 <span className="text-[9px] text-emerald-100 font-normal">Envío gratis</span></div>
         </div>
-        <button onClick={() => openCheckout(2)} className="btn-primary-cta py-2.5 px-4 text-xs font-black uppercase w-auto">
+        <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat py-2.5 px-4 text-xs font-black uppercase w-auto">
           <CartIcon className="h-4 w-4" />
           PEDIR AHORA
         </button>
