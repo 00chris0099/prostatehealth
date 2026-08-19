@@ -12,6 +12,9 @@ const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope" });
 export const metadata: Metadata = {
   title: "ImportHealth | Soluciones Naturales de Grado Clínico para tu Bienestar",
   description: "ImportHealth acerca las mejores soluciones naturales e innovadoras de grado clínico. Envíos gratis a todo el Perú y pago contra entrega.",
+  verification: {
+    google: "google0fba4ef6d49804d8",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
