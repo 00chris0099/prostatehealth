@@ -335,14 +335,13 @@ export default function Home() {
       ============================================================ */}
       <section className="min-h-[100svh] flex flex-col bg-white">
 
-        {/* Imagen del producto — ajustada para dar espacio al contenido a simple vista */}
-        <div className="relative w-full overflow-hidden bg-slate-50 flex-1" style={{ minHeight: "36svh", maxHeight: "42svh" }}>
-          <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white pointer-events-none z-10" />
+        {/* Imagen del producto — seccion2.png para mostrar claramente el pack de productos */}
+        <div className="relative w-full overflow-hidden bg-slate-50 flex-1 flex items-center justify-center p-3 sm:p-4" style={{ minHeight: "34svh", maxHeight: "40svh" }}>
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-50/40 via-transparent to-white pointer-events-none z-10" />
           <img
-            src="/seccion1.png"
-            alt="Prostacare — Tratamiento Natural para la Próstata"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: "center 15%" }}
+            src="/seccion2.png"
+            alt="Pack Prostacare — Cápsulas y Parches"
+            className="w-full h-full object-contain drop-shadow-md z-0"
           />
         </div>
 
