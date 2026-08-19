@@ -257,6 +257,15 @@ export default function Home() {
   const activePack = PACK_OPTIONS.find((p) => p.id === selectedPackId) || PACK_OPTIONS[1];
   const finalPrice = activePack.basePrice;
 
+  // Valida en tiempo real si todos los campos obligatorios están completos
+  const isFormValid =
+    fullName.trim().length > 0 &&
+    /^9\d{8}$/.test(phone.replace(/\D/g, "")) &&
+    selectedDept.length > 0 &&
+    selectedProv.length > 0 &&
+    selectedDist.length > 0 &&
+    address.trim().length > 0;
+
   // Submit checkout form
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -1146,13 +1155,22 @@ export default function Home() {
                 {/* Submit button */}
                 <button
                   type="submit"
-                  disabled={status === "loading"}
-                  className="btn-primary-cta w-full text-center py-3.5 text-base sm:text-xl uppercase disabled:opacity-60"
+                  disabled={status === "loading" || !isFormValid}
+                  className={`btn-primary-cta w-full text-center py-3.5 text-base sm:text-xl uppercase transition-all duration-200 ${
+                    !isFormValid
+                      ? "opacity-40 cursor-not-allowed grayscale"
+                      : "opacity-100"
+                  }`}
                 >
                   {status === "loading" ? (
                     <>
                       <SpinnerIcon className="h-5 w-5 animate-spin" />
                       <span>REGISTRANDO PEDIDO...</span>
+                    </>
+                  ) : !isFormValid ? (
+                    <>
+                      <LockIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+                      <span>COMPLETA TUS DATOS PARA CONFIRMAR</span>
                     </>
                   ) : (
                     <>
