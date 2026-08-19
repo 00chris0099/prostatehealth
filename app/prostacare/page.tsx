@@ -335,19 +335,19 @@ export default function Home() {
       ============================================================ */}
       <section className="min-h-[100svh] flex flex-col bg-white">
 
-        {/* Imagen del producto — ocupa la mayor parte de la pantalla */}
-        <div className="relative w-full overflow-hidden bg-slate-50 flex-1" style={{ minHeight: "52svh", maxHeight: "62svh" }}>
+        {/* Imagen del producto — ajustada para dar espacio al contenido a simple vista */}
+        <div className="relative w-full overflow-hidden bg-slate-50 flex-1" style={{ minHeight: "36svh", maxHeight: "42svh" }}>
           <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-white pointer-events-none z-10" />
           <img
             src="/seccion1.png"
             alt="Prostacare — Tratamiento Natural para la Próstata"
             className="w-full h-full object-cover"
-            style={{ objectPosition: "center 20%" }}
+            style={{ objectPosition: "center 15%" }}
           />
         </div>
 
         {/* Info del producto debajo de la imagen */}
-        <div className="w-full bg-white px-4 pt-4 pb-6 sm:px-8 sm:pt-5 sm:pb-8 flex flex-col gap-3.5 max-w-2xl mx-auto">
+        <div className="w-full bg-white px-4 pt-3 pb-4 sm:px-8 sm:pt-4 sm:pb-6 flex flex-col gap-2.5 sm:gap-3 max-w-2xl mx-auto">
 
           <div>
             <span className="text-[10px] sm:text-xs font-extrabold tracking-widest text-emerald-700 uppercase">
