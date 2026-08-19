@@ -122,7 +122,7 @@ export default function Home() {
   const [notifIndex, setNotifIndex] = useState(0);
   const [notifState, setNotifState] = useState<"idle" | "visible" | "leaving">("idle");
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [selectedPackId, setSelectedPackId] = useState(2);
+  const [selectedPackId, setSelectedPackId] = useState(1); // Default to 1-pack (S/ 124)
   const [selectedDept, setSelectedDept] = useState("Lima");
   const [selectedProv, setSelectedProv] = useState("Lima");
   const [selectedDist, setSelectedDist] = useState("Miraflores");
@@ -361,39 +361,11 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Chips de pack — estilo variante e-commerce */}
-          <div>
-            <p className="text-[11px] sm:text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Selecciona tu pack:</p>
-            <div className="flex flex-wrap gap-2">
-              {PACK_OPTIONS.map((pack) => (
-                <button
-                  key={pack.id}
-                  onClick={() => setSelectedPackId(pack.id)}
-                  className={`relative flex flex-col items-center justify-center rounded-xl border-2 px-3.5 py-2 text-xs font-extrabold transition-all duration-150 ${
-                    selectedPackId === pack.id
-                      ? "border-emerald-600 bg-emerald-600 text-white shadow-md"
-                      : "border-slate-200 bg-white text-slate-700 hover:border-emerald-400"
-                  }`}
-                >
-                  {pack.isPopular && (
-                    <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 bg-amber-400 text-slate-950 text-[7px] font-black px-1.5 py-0.5 rounded-full uppercase whitespace-nowrap">
-                      🔥 MÁS POPULAR
-                    </span>
-                  )}
-                  <span className="text-[11px] sm:text-sm font-black">{pack.title}</span>
-                  <span className={`text-[9px] sm:text-[10px] mt-0.5 ${selectedPackId === pack.id ? "text-emerald-100" : "text-slate-400"}`}>
-                    S/ {pack.basePrice}
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Precio */}
+          {/* Precio Fijo Oferta S/ 124 */}
           <div className="flex items-baseline gap-2">
-            <span className="text-3xl sm:text-4xl font-black text-slate-950">S/ {activePack.basePrice}</span>
-            <span className="text-sm sm:text-base text-slate-400 line-through font-bold">S/ {activePack.normalPrice}</span>
-            <span className="ml-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] sm:text-xs font-black text-amber-700">{activePack.savingsText}</span>
+            <span className="text-3xl sm:text-4xl font-black text-slate-950">S/ 124</span>
+            <span className="text-sm sm:text-base text-slate-400 line-through font-bold">S/ 190</span>
+            <span className="ml-1 rounded-full bg-amber-100 px-2 py-0.5 text-[10px] sm:text-xs font-black text-amber-700">Ahorras S/ 66</span>
           </div>
 
           {/* Badges */}
@@ -410,9 +382,9 @@ export default function Home() {
           </div>
 
           {/* CTA */}
-          <button onClick={() => openCheckout(selectedPackId)} className="btn-primary-cta btn-beat w-full justify-center text-sm sm:text-base py-3.5">
+          <button onClick={() => openCheckout(1)} className="btn-primary-cta btn-beat w-full justify-center text-sm sm:text-base py-3.5">
             <CartIcon className="h-5 w-5" />
-            PEDIR AHORA — PAGO EN CASA (S/ {activePack.basePrice})
+            PEDIR AHORA — PAGO EN CASA (S/ 124)
           </button>
 
           <p className="flex items-center justify-center gap-1.5 text-center text-[10px] sm:text-xs font-bold text-slate-400">
