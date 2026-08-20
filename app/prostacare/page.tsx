@@ -36,6 +36,12 @@ import {
 const WHATSAPP_NUMBER = "51935381231";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, quiero información sobre Prostacare")}`;
 
+const getWhatsAppOrderUrl = (packId?: number) => {
+  const pack = PACK_OPTIONS.find((p) => p.id === packId) || PACK_OPTIONS[0];
+  const msg = `Hola, quiero pedir ${pack.title} (S/ ${pack.basePrice}) de Prostacare. Por favor me brindan información para realizar mi pedido.`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+};
+
 const PACK_OPTIONS = [
   {
     id: 1,
@@ -228,10 +234,10 @@ export default function Home() {
   const openCheckout = (packIdChoice?: number) => {
     const targetPackId = packIdChoice || selectedPackId;
     if (packIdChoice) setSelectedPackId(packIdChoice);
-    const pack = PACK_OPTIONS.find((p) => p.id === targetPackId) || PACK_OPTIONS[1];
-    trackAddToCart(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
-    trackInitiateCheckout(PACK_CONTENT_IDS[targetPackId], pack.title, pack.basePrice, pack.quantity);
-    setIsCheckoutOpen(true);
+    const pack = PACK_OPTIONS.find((p) => p.id === targetPackId) || PACK_OPTIONS[0];
+    trackAddToCart(PACK_CONTENT_IDS[targetPackId] || "PROSTACARE-30D", pack.title, pack.basePrice, pack.quantity);
+    trackContact("WhatsApp Order");
+    window.open(getWhatsAppOrderUrl(targetPackId), "_blank");
   };
 
   const handleCloseCheckout = () => setIsCheckoutOpen(false);
@@ -381,10 +387,16 @@ export default function Home() {
           </div>
 
           {/* CTA */}
-          <button onClick={() => openCheckout(1)} className="btn-primary-cta btn-beat w-full justify-center text-sm sm:text-base py-3.5">
-            <CartIcon className="h-5 w-5" />
-            PEDIR AHORA — PAGO EN CASA (S/ 124)
-          </button>
+          <a
+            href={getWhatsAppOrderUrl(1)}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackContact("WhatsApp Order")}
+            className="btn-primary-cta btn-beat w-full justify-center text-sm sm:text-base py-3.5"
+          >
+            <WhatsAppIcon className="h-5 w-5" />
+            PEDIR POR WHATSAPP — PAGO EN CASA (S/ 124)
+          </a>
 
           <p className="flex items-center justify-center gap-1.5 text-center text-[10px] sm:text-xs font-bold text-slate-400">
             <LockIcon className="h-3 w-3 shrink-0" />
@@ -434,10 +446,16 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat mx-auto">
-              <CartIcon className="h-5 w-5" />
-              QUIERO PROBAR (S/ 124)
-            </button>
+            <a
+              href={getWhatsAppOrderUrl(1)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackContact("WhatsApp Order")}
+              className="btn-primary-cta btn-beat mx-auto"
+            >
+              <WhatsAppIcon className="h-5 w-5" />
+              QUIERO PEDIR POR WHATSAPP (S/ 124)
+            </a>
           </div>
         </div>
       </section>
@@ -478,10 +496,16 @@ export default function Home() {
                 ))}
               </div>
               <div className="flex flex-col items-center md:items-start gap-2">
-                <button onClick={() => openCheckout(1)} className="btn-primary-cta btn-beat px-7 py-4 sm:px-10 sm:py-5 text-base sm:text-xl">
-                  <CartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-                  PEDIR AHORA — S/ 124
-                </button>
+                <a
+                  href={getWhatsAppOrderUrl(1)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackContact("WhatsApp Order")}
+                  className="btn-primary-cta btn-beat px-7 py-4 sm:px-10 sm:py-5 text-base sm:text-xl"
+                >
+                  <WhatsAppIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+                  PEDIR POR WHATSAPP — S/ 124
+                </a>
                 <p className="flex items-center gap-1.5 text-xs font-bold text-emerald-300">
                   <CheckIcon className="h-4 w-4" strokeWidth={3} />
                   PAGO CONTRA ENTREGA EN TODO EL PERÚ
@@ -561,10 +585,16 @@ export default function Home() {
               <div className="text-3xl sm:text-5xl font-black text-emerald-600 leading-tight">S/ 124.00 HOY</div>
               <p className="inline-block rounded-full bg-amber-100 px-3 py-1 text-[10px] sm:text-xs font-black uppercase text-amber-700">Ahorras S/ 66 + Envío Gratis</p>
             </div>
-            <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat w-full justify-center">
-              <CartIcon className="h-5 w-5 sm:h-6 sm:w-6" />
-              SELECCIONAR PAQUETE Y PEDIR
-            </button>
+            <a
+              href={getWhatsAppOrderUrl(1)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackContact("WhatsApp Order")}
+              className="btn-primary-cta btn-beat w-full justify-center"
+            >
+              <WhatsAppIcon className="h-5 w-5 sm:h-6 sm:w-6" />
+              PEDIR POR WHATSAPP (S/ 124)
+            </a>
             <div className="flex items-center justify-center gap-2 rounded-xl bg-emerald-50 border border-emerald-200 p-2.5 text-xs sm:text-sm text-emerald-950 font-bold text-left">
               <ShieldCheckIcon className="h-5 w-5 shrink-0 text-emerald-700" />
               <span><strong>Sin riesgo:</strong> Paquete discreto. Pagas en efectivo o Yape solo al recibirlo.</span>
@@ -582,8 +612,8 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* NOTIFICACIÓN DE COMPRA EN VIVO */}
-      {notifState !== "idle" && (
+      {/* NOTIFICACIÓN DE COMPRA EN VIVO (DESACTIVADA) */}
+      {false && notifState !== "idle" && (
         <div role="status" aria-live="polite" onClick={() => openCheckout(PURCHASE_EVENTS[notifIndex].pack)} className={`fixed bottom-36 sm:bottom-8 left-3 sm:left-6 z-30 w-[220px] sm:w-[260px] cursor-pointer select-none ${notifState === "visible" ? "notif-in" : "notif-out pointer-events-none"}`}>
           <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/95 backdrop-blur p-2 shadow-lg hover:border-emerald-300 transition-colors">
             {PURCHASE_EVENTS[notifIndex].image ? (
@@ -607,9 +637,9 @@ export default function Home() {
           <div className="text-[10px] font-black">🛵 PAGA EN CASA AL RECIBIR</div>
           <div className="text-sm font-black">S/ 124 <span className="text-[9px] text-emerald-100 font-normal">Envío gratis</span></div>
         </div>
-        <button onClick={() => openCheckout(2)} className="btn-primary-cta btn-beat py-2.5 px-4 text-xs font-black uppercase w-auto">
-          <CartIcon className="h-4 w-4" />PEDIR AHORA
-        </button>
+        <a href={getWhatsAppOrderUrl(1)} target="_blank" rel="noopener noreferrer" onClick={() => trackContact("WhatsApp Order")} className="btn-primary-cta btn-beat py-2.5 px-4 text-xs font-black uppercase w-auto flex items-center gap-1.5">
+          <WhatsAppIcon className="h-4 w-4" />PEDIR POR WHATSAPP
+        </a>
       </div>
 
       {/* BOTÓN FLOTANTE WHATSAPP */}
@@ -625,9 +655,9 @@ export default function Home() {
       )}
 
       {/* ============================================================
-          MODAL DE CHECKOUT
+          MODAL DE CHECKOUT (DESHABILITADO - CÓDIGO CONSERVADO)
       ============================================================ */}
-      {isCheckoutOpen && (
+      {false && isCheckoutOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 overflow-y-auto modal-backdrop animate-fadeIn">
           <div className="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 my-auto max-h-[92vh] flex flex-col">
 
