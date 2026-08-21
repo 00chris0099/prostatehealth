@@ -21,8 +21,6 @@ const WHATSAPP_URL =
 const NAV_LINKS = [
   { href: "/", label: "Inicio", Icon: HomeIcon },
   { href: "/productos", label: "Productos", Icon: PackageIcon },
-  { href: "/prostacare", label: "Prostacare", Icon: PackageIcon },
-  { href: "/nadplus", label: "NAD+ Ultimate", Icon: PackageIcon },
   { href: "/nosotros", label: "Nosotros", Icon: UsersIcon },
 ];
 
@@ -67,16 +65,8 @@ export default function StoreNavbar() {
             })}
           </nav>
 
-          {/* ── Desktop CTA ── */}
+          {/* ── Desktop WhatsApp ── */}
           <div className="store-navbar-actions">
-            <Link href="/prostacare" className="store-btn-cta">
-              <CartIcon className="h-4 w-4" />
-              Prostacare
-            </Link>
-            <Link href="/nadplus" className="store-btn-cta" style={{ background: "var(--brand-navy-light)" }}>
-              <CartIcon className="h-4 w-4" />
-              NAD+ Ultimate
-            </Link>
             <a
               href={WHATSAPP_URL}
               target="_blank"
@@ -124,16 +114,6 @@ export default function StoreNavbar() {
               })}
 
               <div className="store-mobile-divider" />
-
-              <Link href="/prostacare" className="store-mobile-cta" onClick={() => setMobileOpen(false)}>
-                <CartIcon className="h-5 w-5 shrink-0" />
-                Comprar Prostacare
-              </Link>
-
-              <Link href="/nadplus" className="store-mobile-cta" onClick={() => setMobileOpen(false)} style={{ background: "var(--brand-navy-light)" }}>
-                <CartIcon className="h-5 w-5 shrink-0" />
-                Comprar NAD+ Ultimate
-              </Link>
 
               <a
                 href={WHATSAPP_URL}

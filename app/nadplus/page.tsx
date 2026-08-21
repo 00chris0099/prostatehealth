@@ -33,11 +33,11 @@ const getWhatsAppOrderUrl = () => {
 
 const PURCHASE_EVENTS = [
   { name: "Rosa M. de Sanchez", city: "Arequipa", time: "hace 2 min", initials: "RS", image: null as string | null },
-  { name: "Pedro Gutierrez", city: "Lima", time: "hace 5 min", initials: "PG", image: null as string | null },
-  { name: "Manuel Quispe", city: "Cusco", time: "hace 8 min", initials: "MQ", image: null as string | null },
+  { name: "Pedro Gutierrez", city: "Lima", time: "hace 5 min", initials: "PG", image: "/perfil/diego.jpg" },
+  { name: "Manuel Quispe", city: "Cusco", time: "hace 8 min", initials: "MQ", image: "/perfil/fernando.jpg" },
   { name: "Carmen Tapia", city: "Trujillo", time: "hace 12 min", initials: "CT", image: null as string | null },
-  { name: "Jorge Ramirez", city: "Chiclayo", time: "hace 15 min", initials: "JR", image: null as string | null },
-  { name: "Luis Flores", city: "Huancayo", time: "hace 18 min", initials: "LF", image: null as string | null },
+  { name: "Jorge Ramirez", city: "Chiclayo", time: "hace 15 min", initials: "JR", image: "/perfil/jorge.jpg" },
+  { name: "Luis Flores", city: "Huancayo", time: "hace 18 min", initials: "LF", image: "/perfil/mario.jpg" },
 ];
 
 const INGREDIENTS = [
@@ -227,12 +227,12 @@ export default function NadPlusLanding() {
       ============================================================ */}
       <section ref={heroRef} className="min-h-[100svh] flex flex-col bg-white">
         {/* Carrusel de imagenes del producto con zoom */}
-        <div className="relative w-full overflow-hidden bg-indigo-50 flex-1 flex flex-col items-center justify-center p-3 sm:p-4" style={{ minHeight: "38svh", maxHeight: "44svh" }}>
+        <div className="relative w-full overflow-hidden bg-indigo-50 flex-1 flex flex-col items-center justify-center p-2 sm:p-4" style={{ minHeight: "28svh", maxHeight: "36svh" }}>
           <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/40 via-transparent to-white pointer-events-none z-10" />
 
           {/* Contenedor principal del carrusel */}
           <div
-            className="relative w-full max-w-lg mx-auto overflow-hidden rounded-2xl cursor-zoom-in"
+            className="relative w-full max-w-md mx-auto overflow-hidden rounded-xl sm:rounded-2xl sm:cursor-zoom-in"
             onMouseEnter={() => setIsZoomed(true)}
             onMouseLeave={() => setIsZoomed(false)}
             onMouseMove={handleMouseMove}
@@ -241,7 +241,7 @@ export default function NadPlusLanding() {
             onTouchEnd={handleTouchEnd}
           >
             <div
-              className="relative aspect-square transition-transform duration-500 ease-out"
+              className="relative aspect-[4/3] sm:aspect-square transition-transform duration-500 ease-out"
               style={
                 isZoomed
                   ? {
@@ -369,8 +369,8 @@ export default function NadPlusLanding() {
       {/* ============================================================
           SECCION 2 - EL PROBLEMA (Senales despues de los 40)
       ============================================================ */}
-      <section ref={(el) => { sectionRefs.current[0] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-slate-50 border-y border-slate-200 py-10 sm:py-0 scroll-reveal">
-        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 space-y-4 sm:space-y-5">
+      <section ref={(el) => { sectionRefs.current[0] = el; }} className="flex flex-col justify-center bg-slate-50 border-y border-slate-200 py-6 sm:py-0 sm:min-h-[100svh] scroll-reveal">
+        <div className="mx-auto w-full max-w-5xl px-3 sm:px-6 space-y-3 sm:space-y-5">
           <div className="text-center">
             <span className="inline-block text-[10px] xs:text-xs font-extrabold tracking-widest text-red-600 uppercase bg-red-100 px-2.5 py-1 rounded-md">
               SEÑALES DE BAJO RENDIMIENTO CELULAR
@@ -430,7 +430,7 @@ export default function NadPlusLanding() {
       {/* ============================================================
           SECCION 3 - LA SOLUCION (Que es NAD+ y tecnologia liposomal)
       ============================================================ */}
-      <section ref={(el) => { sectionRefs.current[1] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-indigo-950 text-white py-10 sm:py-0 scroll-reveal">
+      <section ref={(el) => { sectionRefs.current[1] = el; }} className="flex flex-col justify-center bg-indigo-950 text-white py-6 sm:py-0 sm:min-h-[100svh] scroll-reveal">
         <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
           <div className="grid gap-8 md:grid-cols-12 items-center">
             <div className="md:col-span-5 flex justify-center order-1 md:order-2">
@@ -490,8 +490,8 @@ export default function NadPlusLanding() {
       {/* ============================================================
           SECCION 4 - INGREDIENTES (Formula 10 en 1)
       ============================================================ */}
-      <section ref={(el) => { sectionRefs.current[2] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-white py-10 sm:py-0 scroll-reveal">
-        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 space-y-5">
+      <section ref={(el) => { sectionRefs.current[2] = el; }} className="flex flex-col justify-center bg-white py-6 sm:py-0 sm:min-h-[100svh] scroll-reveal">
+        <div className="mx-auto w-full max-w-5xl px-3 sm:px-6 space-y-3 sm:space-y-5">
           <div className="text-center">
             <span className="inline-block text-[10px] xs:text-xs font-extrabold tracking-widest text-indigo-600 uppercase bg-indigo-100 px-2.5 py-1 rounded-md">
               FORMULA 10 EN 1
@@ -536,8 +536,8 @@ export default function NadPlusLanding() {
       {/* ============================================================
           SECCION 5 - BENEFICIOS
       ============================================================ */}
-      <section ref={(el) => { sectionRefs.current[3] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-slate-950 text-white py-10 sm:py-0 scroll-reveal">
-        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 space-y-5">
+      <section ref={(el) => { sectionRefs.current[3] = el; }} className="flex flex-col justify-center bg-slate-950 text-white py-6 sm:py-0 sm:min-h-[100svh] scroll-reveal">
+        <div className="mx-auto w-full max-w-5xl px-3 sm:px-6 space-y-3 sm:space-y-5">
           <div className="text-center">
             <h2 className="text-xl sm:text-3xl font-black tracking-tight">Beneficios que se sienten</h2>
             <div className="mt-1.5 flex items-center justify-center gap-1 text-amber-400">
@@ -567,8 +567,8 @@ export default function NadPlusLanding() {
       {/* ============================================================
           SECCION 6 - TESTIMONIOS
       ============================================================ */}
-      <section ref={(el) => { sectionRefs.current[4] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-slate-900 text-white py-10 sm:py-0 scroll-reveal">
-        <div className="mx-auto w-full max-w-5xl px-4 sm:px-6 space-y-5">
+      <section ref={(el) => { sectionRefs.current[4] = el; }} className="flex flex-col justify-center bg-slate-900 text-white py-6 sm:py-0 sm:min-h-[100svh] scroll-reveal">
+        <div className="mx-auto w-full max-w-5xl px-3 sm:px-6 space-y-3 sm:space-y-5">
           <div className="text-center">
             <h2 className="text-xl sm:text-3xl font-black tracking-tight">Lo que dicen nuestros clientes</h2>
             <div className="mt-1.5 flex items-center justify-center gap-1 text-amber-400">
@@ -611,7 +611,7 @@ export default function NadPlusLanding() {
       {/* ============================================================
           SECCION 7 - OFERTA + URGENCIA
       ============================================================ */}
-      <section ref={(el) => { sectionRefs.current[5] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-gradient-to-b from-indigo-50 to-slate-100 py-10 sm:py-0 scroll-reveal">
+      <section ref={(el) => { sectionRefs.current[5] = el; }} className="flex flex-col justify-center bg-gradient-to-b from-indigo-50 to-slate-100 py-6 sm:py-0 sm:min-h-[100svh] scroll-reveal">
         <div className="mx-auto w-full max-w-lg px-4 sm:px-6">
           <div className="rounded-2xl sm:rounded-3xl border-2 border-dashed border-indigo-500 bg-white p-5 sm:p-7 shadow-xl space-y-4 text-center">
             <div className="mx-auto w-full max-w-[170px] sm:max-w-[210px]">

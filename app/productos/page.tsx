@@ -74,34 +74,25 @@ export default function ProductosPage() {
         </section>
 
         {/* ─── Categorías ─── */}
-        <section className="store-section store-section--light">
+        <section className="store-section store-section--light" style={{ padding: "1.5rem 1.25rem" }}>
           <div className="store-section-inner">
-            <div className="store-section-header">
-              <h2 className="store-section-title">Categorías</h2>
-            </div>
             <div className="store-categories-grid">
               {CATEGORIES.map((cat) => {
                 const Icon = CATEGORY_ICONS[cat.icon] || ShieldCheckIcon;
+                const cardClass = `store-category-card${!cat.available ? " store-category-card--coming" : ""}`;
+                if (cat.available) {
+                  return (
+                    <Link key={cat.id} href={cat.id === "energia" ? "/nadplus" : "/productos"} className={cardClass}>
+                      <div className="store-category-icon-wrap"><Icon /></div>
+                      <div className="store-category-content"><h3 className="store-category-title">{cat.label}</h3></div>
+                    </Link>
+                  );
+                }
                 return (
-                  <div
-                    key={cat.id}
-                    className={`store-category-card${!cat.available ? " store-category-card--coming" : ""}`}
-                  >
-                    <div className="store-category-icon-wrap">
-                      <Icon className="h-7 w-7" />
-                    </div>
-                    <div className="store-category-content">
-                      <h3 className="store-category-title">{cat.label}</h3>
-                      <p className="store-category-desc">{cat.description}</p>
-                    </div>
-                    {cat.available ? (
-                      <Link href={cat.id === "energia" ? "/nadplus" : "/productos"} className="store-category-cta">
-                        {cat.productCount} producto{cat.productCount !== 1 ? "s" : ""}
-                        <ChevronRightIcon className="h-3.5 w-3.5" />
-                      </Link>
-                    ) : (
-                      <span className="store-category-soon">Próximamente</span>
-                    )}
+                  <div key={cat.id} className={cardClass}>
+                    <div className="store-category-icon-wrap"><Icon /></div>
+                    <div className="store-category-content"><h3 className="store-category-title">{cat.label}</h3></div>
+                    <span className="store-category-soon">Soon</span>
                   </div>
                 );
               })}
