@@ -816,23 +816,6 @@
   .store-category-title { font-size: 0.8rem; }
   .store-category-desc { display: block; font-size: 0.7rem; margin-top: 0.15rem; }
 }
-  font-weight: 800;
-  color: var(--brand-navy);
-  text-decoration: none;
-  transition: color 0.15s;
-}
-.store-category-cta:hover { color: var(--brand-gold); }
-.store-category-soon {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 800;
-  color: var(--brand-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: var(--brand-surface);
-  padding: 0.2rem 0.5rem;
-  border-radius: 100px;
-}
 
 /* ================================================================ */
 /* PRODUCTS GRID                                                     */
