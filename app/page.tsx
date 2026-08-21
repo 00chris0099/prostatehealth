@@ -87,6 +87,10 @@ export default function StorePage() {
                   Prostacare — Nuestro N.º 1
                   <ArrowRightIcon className="h-4 w-4" />
                 </Link>
+                <Link href="/nadplus" className="store-hero-btn-secondary">
+                  NAD+ Ultimate — Nuevo
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
               </div>
 
               <div className="store-hero-trust-mini">
@@ -182,7 +186,7 @@ export default function StorePage() {
                       <p className="store-category-desc">{cat.description}</p>
                     </div>
                     {cat.available ? (
-                      <Link href="/productos" className="store-category-cta">
+                      <Link href={cat.id === "energia" ? "/nadplus" : "/productos"} className="store-category-cta">
                         Ver productos
                         <ChevronRightIcon className="h-3.5 w-3.5" />
                       </Link>
@@ -255,7 +259,7 @@ export default function StorePage() {
 
                     {/* CTA */}
                     <Link
-                      href="/prostacare"
+                      href={product.landingPage}
                       className="store-product-btn"
                     >
                       <CartIcon className="h-4 w-4" />
@@ -267,10 +271,16 @@ export default function StorePage() {
             </div>
 
             <div className="store-section-footer-cta">
-              <Link href="/productos" className="store-link-more">
-                Ver todos los productos
-                <ArrowRightIcon className="h-4 w-4" />
-              </Link>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Link href="/productos" className="store-link-more">
+                  Ver todos los productos
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+                <Link href="/nadplus" className="store-link-more">
+                  Descubrir NAD+ Ultimate
+                  <ArrowRightIcon className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -294,10 +304,16 @@ export default function StorePage() {
                 Prostacare al precio más bajo del año, con envío cubierto a cualquier
                 parte del Perú.
               </p>
-              <Link href="/prostacare" className="store-promo-btn">
-                Aprovechar Promo
-                <ArrowRightIcon className="h-5 w-5" />
-              </Link>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/prostacare" className="store-promo-btn">
+                  Aprovechar Promo
+                  <ArrowRightIcon className="h-5 w-5" />
+                </Link>
+                <Link href="/nadplus" className="store-promo-btn" style={{ background: "rgba(255,255,255,0.15)", border: "1.5px solid rgba(255,255,255,0.3)" }}>
+                  Ver NAD+ Ultimate
+                  <ArrowRightIcon className="h-5 w-5" />
+                </Link>
+              </div>
             </div>
             <div className="store-promo-image-col">
               <div className="store-promo-image-wrap">

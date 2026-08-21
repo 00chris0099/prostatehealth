@@ -21,6 +21,7 @@ export interface Product {
   isAvailable: boolean;
   isBestSeller: boolean;
   packId: number;
+  landingPage: string;
 }
 
 export interface Category {
@@ -53,6 +54,7 @@ export const PRODUCTS: Product[] = [
     isAvailable: true,
     isBestSeller: false,
     packId: 1,
+    landingPage: "/prostacare",
   },
   {
     id: "prostacare-2",
@@ -73,6 +75,7 @@ export const PRODUCTS: Product[] = [
     isAvailable: true,
     isBestSeller: true,
     packId: 2,
+    landingPage: "/prostacare",
   },
   {
     id: "prostacare-3",
@@ -93,6 +96,28 @@ export const PRODUCTS: Product[] = [
     isAvailable: true,
     isBestSeller: false,
     packId: 3,
+    landingPage: "/prostacare",
+  },
+  {
+    id: "nadplus-1",
+    slug: "nadplus-ultimate",
+    name: "Liposomal NAD+ Ultimate",
+    subtitle: "60 Cápsulas Vegetarianas — 1 Mes",
+    category: "energia",
+    categoryLabel: "Energía y Vitalidad",
+    image: "/nadplus/nadplus-main.png",
+    price: 189,
+    normalPrice: 299,
+    savings: 110,
+    rating: 4.9,
+    reviewCount: 287,
+    badge: "NUEVO",
+    badgeType: "new",
+    desc: "Fórmula 10 en 1 con NAD+, Resveratrol, Glutatión y Astaxantina. Tecnología liposomal de alta absorción para energía celular y longevidad.",
+    isAvailable: true,
+    isBestSeller: false,
+    packId: 1,
+    landingPage: "/nadplus",
   },
 ];
 
@@ -119,8 +144,8 @@ export const CATEGORIES: Category[] = [
     label: "Energía y Vitalidad",
     icon: "zap",
     description: "Suplementos para recobrar tu energía diaria",
-    available: false,
-    productCount: 0,
+    available: true,
+    productCount: 1,
   },
   {
     id: "inmune",
