@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8faff" />
+      <stop offset="100%" style="stop-color:#eef2ff" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#bg3)"/>
+
+  <!-- Label mockup (flat, like a nutrition label) -->
+  <g transform="translate(100, 50)">
+    <rect x="0" y="0" width="600" height="700" rx="16" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+    <rect x="0" y="0" width="600" height="12" rx="16" fill="#4F46E5"/>
+
+    <!-- Brand -->
+    <text x="300" y="50" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#6b7280" letter-spacing="4">NUTRIINGREDIENTS</text>
+    <line x1="60" y1="62" x2="540" y2="62" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Product Name -->
+    <text x="300" y="100" text-anchor="middle" font-family="Arial" font-size="18" fill="#6b7280">liposomal</text>
+    <text x="300" y="140" text-anchor="middle" font-family="Arial" font-size="52" font-weight="900" fill="#1e1b4b">NAD+ ultimate</text>
+    <line x1="180" y1="158" x2="420" y2="158" stroke="#4F46E5" stroke-width="3"/>
+
+    <!-- Ingredients list -->
+    <text x="60" y="195" font-family="Arial" font-size="16" font-weight="800" fill="#1e1b4b">ACTIVE INGREDIENTS PER SERVING:</text>
+
+    {["NAD+ (Nicotinamide Adenine Dinucleotide)", "Resveratrol (from Japanese Knotweed)", "Glutathione (Reduced Form)", "R-Alpha Lipoic Acid", "Astaxanthin (from Haematococcus)", "Quercetin Dihydrate", "Coenzyme Q10", "Vitamin B12 (Methylcobalamin)", "Vitamin D3 (Cholecalciferol)", "BioPerine (Black Pepper Extract)"].map((ing, i) => (
+      <g key={i} transform={`translate(80, ${220 + i * 28})`}>
+        <circle cx="6" cy="6" r="4" fill="#4F46E5" opacity="0.2"/>
+        <circle cx="6" cy="6" r="2" fill="#4F46E5"/>
+        <text x="20" y="10" font-family="Arial" font-size="13" fill="#374151">{ing}</text>
+      </g>
+    ))}
+
+    <!-- Serving size -->
+    <line x1="60" y1="510" x2="540" y2="510" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="60" y="540" font-family="Arial" font-size="14" font-weight="800" fill="#1e1b4b">SUPPLEMENT FACTS</text>
+    <text x="60" y="565" font-family="Arial" font-size="12" fill="#6b7280">Serving Size: 2 Capsules</text>
+    <text x="60" y="585" font-family="Arial" font-size="12" fill="#6b7280">Servings Per Container: 30</text>
+    <text x="60" y="610" font-family="Arial" font-size="14" font-weight="800" fill="#1e1b4b">Amount Per Serving: 1,000mg</text>
+
+    <!-- Badges at bottom -->
+    <g transform="translate(120, 640)">
+      <rect x="0" y="0" width="140" height="32" rx="16" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
+      <text x="70" y="21" text-anchor="middle" font-family="Arial" font-size="10" font-weight="800" fill="#166534">VEGETARIAN</text>
+    </g>
+    <g transform="translate(280, 640)">
+      <rect x="0" y="0" width="140" height="32" rx="16" fill="#eff6ff" stroke="#93c5fd" stroke-width="1"/>
+      <text x="70" y="21" text-anchor="middle" font-family="Arial" font-size="10" font-weight="800" fill="#1e40af">LIPOSOMAL</text>
+    </g>
+    <g transform="translate(440, 640)">
+      <rect x="0" y="0" width="100" height="32" rx="16" fill="#fefce8" stroke="#fde047" stroke-width="1"/>
+      <text x="50" y="21" text-anchor="middle" font-family="Arial" font-size="10" font-weight="800" fill="#854d0e">GMP</text>
+    </g>
+  </g>
+
+  <text x="400" y="780" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#1e1b4b" opacity="0.5">DETALLE DE INGREDIENTES Y ETIQUETA</text>
+</svg>

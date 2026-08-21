@@ -105,7 +105,7 @@ export const PRODUCTS: Product[] = [
     subtitle: "60 Cápsulas Vegetarianas — 1 Mes",
     category: "energia",
     categoryLabel: "Energía y Vitalidad",
-    image: "/nadplus/nadplus-main.png",
+    image: "/nadplus/nadplus-main.svg",
     price: 189,
     normalPrice: 299,
     savings: 110,

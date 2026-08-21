@@ -206,14 +206,12 @@ export default function StorePage() {
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <div style={{ position: "relative", width: "100%", maxWidth: "320px" }}>
                   <div style={{ position: "absolute", inset: "-20px", borderRadius: "50%", background: "radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
-                  {/* Placeholder: Imagen del frasco NAD+ Ultimate */}
-                  <div style={{ width: "100%", aspectRatio: "1", borderRadius: "1.25rem", background: "rgba(255,255,255,0.6)", border: "2px dashed rgba(79,70,229,0.3)", display: "flex", alignItems: "center", justifyContent: "center", padding: "1.5rem" }}>
-                    <div style={{ textAlign: "center" }}>
-                      <FlaskIcon className="h-16 w-16 mx-auto" style={{ color: "rgba(79,70,229,0.3)" }} />
-                      <p style={{ fontSize: "0.75rem", fontWeight: 700, color: "#4F46E5", marginTop: "0.5rem" }}>IMAGEN NAD+ ULTIMATE</p>
-                      <p style={{ fontSize: "0.65rem", color: "#6366f1", marginTop: "0.25rem" }}>Coloca aqui el frasco del producto</p>
-                    </div>
-                  </div>
+                  <img
+                    src="/nadplus/nadplus-main.svg"
+                    alt="Liposomal NAD+ Ultimate"
+                    loading="lazy"
+                    style={{ width: "100%", height: "auto", objectFit: "contain", filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.15))" }}
+                  />
                   <div style={{ position: "absolute", bottom: "-8px", right: "-8px", background: "#1e1b4b", borderRadius: "0.75rem", padding: "0.5rem 0.85rem", display: "flex", alignItems: "center", gap: "0.35rem", boxShadow: "0 4px 16px rgba(0,0,0,0.2)", whiteSpace: "nowrap" }}>
                     <StarIcon className="h-3.5 w-3.5 text-amber-400" />
                     <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#fff" }}>4.9 / 5</span>

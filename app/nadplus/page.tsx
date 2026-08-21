@@ -63,10 +63,10 @@ const BENEFITS = [
 ];
 
 const HERO_SLIDES = [
-  { id: 1, label: "Vista frontal: Caja + Frasco de NAD+ Ultimate sobre fondo blanco limpio", alt: "Liposomal NAD+ Ultimate - Vista frontal" },
-  { id: 2, label: "Vista lateral: Frasco abierto mostrando capsulas vegetarianas", alt: "Liposomal NAD+ Ultimate - Capsulas" },
-  { id: 3, label: "Vista de detalle: Etiqueta con ingredientes y nutritional facts", alt: "Liposomal NAD+ Ultimate - Detalle de ingredientes" },
-  { id: 4, label: "Vifestyle: Persona activa y saludable tomando el suplemento", alt: "Liposomal NAD+ Ultimate - Uso diario" },
+  { id: 1, image: "/nadplus/nadplus-slide-1.svg", label: "Vista frontal: Caja + Frasco", alt: "Liposomal NAD+ Ultimate - Vista frontal" },
+  { id: 2, image: "/nadplus/nadplus-slide-2.svg", label: "Capsulas vegetarianas", alt: "Liposomal NAD+ Ultimate - Capsulas" },
+  { id: 3, image: "/nadplus/nadplus-slide-3.svg", label: "Detalle de ingredientes", alt: "Liposomal NAD+ Ultimate - Ingredientes" },
+  { id: 4, image: "/nadplus/nadplus-slide-4.svg", label: "Energia y vitalidad", alt: "Liposomal NAD+ Ultimate - Lifestyle" },
 ];
 
 export default function NadPlusLanding() {
@@ -256,16 +256,12 @@ export default function NadPlusLanding() {
                   key={slide.id}
                   className={`absolute inset-0 transition-opacity duration-500 ${idx === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}
                 >
-                  {/* Placeholder de imagen - reemplazar con <img> cuando tengas las fotos */}
-                  <div className="w-full h-full bg-white flex items-center justify-center p-6 border border-indigo-100">
-                    <div className="text-center">
-                      <FlaskIcon className="h-16 w-16 mx-auto text-indigo-300 mb-3" />
-                      <p className="text-xs font-bold text-indigo-600">{slide.label}</p>
-                      <p className="text-[10px] text-indigo-400 mt-1 max-w-[280px] mx-auto">
-                        Reemplaza con: &lt;img src="/nadplus/slide-{slide.id}.jpg" alt="{slide.alt}" className="w-full h-full object-contain" /&gt;
-                      </p>
-                    </div>
-                  </div>
+                  <img
+                    src={slide.image}
+                    alt={slide.alt}
+                    className="w-full h-full object-contain bg-white"
+                    loading={idx === 0 ? "eager" : "lazy"}
+                  />
                 </div>
               ))}
             </div>
@@ -440,14 +436,11 @@ export default function NadPlusLanding() {
             <div className="md:col-span-5 flex justify-center order-1 md:order-2">
               <div className="relative w-full max-w-[240px] sm:max-w-sm">
                 <div className="absolute -inset-8 rounded-full bg-indigo-500/20 blur-3xl -z-10" />
-                {/* Placeholder: Imagen del frasco NAD+ con efecto de brillo/celula */}
-                <div className="w-full aspect-square rounded-2xl bg-indigo-900/50 border-2 border-dashed border-indigo-400/30 flex items-center justify-center p-4">
-                  <div className="text-center">
-                    <FlaskIcon className="h-16 w-16 mx-auto text-indigo-400/50 mb-3" />
-                    <p className="text-xs font-bold text-indigo-300/70">IMAGEN DEL PRODUCTO</p>
-                    <p className="text-[10px] text-indigo-400/50 mt-1">Frasco de NAD+ Ultimate con efecto de brillo o particulas de energia</p>
-                  </div>
-                </div>
+                <img
+                  src="/nadplus/nadplus-main.svg"
+                  alt="Liposomal NAD+ Ultimate - Frasco"
+                  className="w-full h-auto object-contain drop-shadow-2xl"
+                />
               </div>
             </div>
             <div className="md:col-span-7 order-2 md:order-1 space-y-4 text-center md:text-left">
@@ -621,14 +614,13 @@ export default function NadPlusLanding() {
       <section ref={(el) => { sectionRefs.current[5] = el; }} className="min-h-[100svh] flex flex-col justify-center bg-gradient-to-b from-indigo-50 to-slate-100 py-10 sm:py-0 scroll-reveal">
         <div className="mx-auto w-full max-w-lg px-4 sm:px-6">
           <div className="rounded-2xl sm:rounded-3xl border-2 border-dashed border-indigo-500 bg-white p-5 sm:p-7 shadow-xl space-y-4 text-center">
-            {/* Placeholder: Imagen del producto (frasco individual) */}
             <div className="mx-auto w-full max-w-[170px] sm:max-w-[210px]">
-              <div className="w-full aspect-square rounded-xl bg-indigo-50 border-2 border-dashed border-indigo-200 flex items-center justify-center">
-                <div className="text-center p-3">
-                  <FlaskIcon className="h-10 w-10 mx-auto text-indigo-300 mb-2" />
-                  <p className="text-[9px] font-bold text-indigo-500">IMAGEN DEL FRASCO</p>
-                </div>
-              </div>
+              <img
+                src="/nadplus/nadplus-main.svg"
+                alt="Liposomal NAD+ Ultimate"
+                loading="lazy"
+                className="w-full h-auto object-contain drop-shadow-md"
+              />
             </div>
 
             {/* Stock */}

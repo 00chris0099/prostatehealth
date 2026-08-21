@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8faff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#eef2ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="capGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e3a5f" />
+      <stop offset="50%" style="stop-color:#2d5a8a" />
+      <stop offset="100%" style="stop-color:#1e3a5f" />
+    </linearGradient>
+    <filter id="shadow2" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="8" dy="14" stdDeviation="16" flood-color="#1e3a5f" flood-opacity="0.1"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="800" fill="url(#bg2)"/>
+
+  <!-- Open bottle (cap off to the side) -->
+  <g transform="translate(220, 80)" filter="url(#shadow2)">
+    <!-- Cap lying on side -->
+    <g transform="translate(220, 60) rotate(15)">
+      <rect x="0" y="0" width="80" height="50" rx="8" fill="url(#capGrad2)"/>
+      <rect x="4" y="8" width="72" height="4" rx="2" fill="#fff" opacity="0.1"/>
+    </g>
+
+    <!-- Bottle body (open top) -->
+    <rect x="80" y="60" width="70" height="30" rx="4" fill="#f0f1f3"/>
+    <path d="M 60 90 Q 60 110, 42 125 L 42 125 L 198 125 Q 180 110, 180 90 Z" fill="#f0f1f3"/>
+    <rect x="42" y="125" width="156" height="340" rx="8" fill="#f8f9fa"/>
+    <!-- Label -->
+    <rect x="48" y="135" width="144" height="318" rx="5" fill="#fff"/>
+    <rect x="48" y="135" width="144" height="6" rx="5" fill="#4F46E5"/>
+    <text x="120" y="165" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="#6b7280" letter-spacing="2">NUTRIINGREDIENTS</text>
+    <text x="120" y="200" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b7280">liposomal</text>
+    <text x="120" y="228" text-anchor="middle" font-family="Arial" font-size="24" font-weight="900" fill="#1e1b4b">NAD+</text>
+    <text x="120" y="250" text-anchor="middle" font-family="Arial" font-size="15" font-weight="700" fill="#1e1b4b">ultimate</text>
+  </g>
+
+  <!-- Capsules scattered around -->
+  <g transform="translate(120, 500)">
+    <!-- Capsule 1 -->
+    <g transform="rotate(-20)">
+      <rect x="0" y="0" width="30" height="14" rx="7" fill="#4F46E5" opacity="0.8"/>
+      <rect x="15" y="0" width="15" height="14" rx="7" fill="#818cf8" opacity="0.6"/>
+    </g>
+    <!-- Capsule 2 -->
+    <g transform="translate(60, 10) rotate(10)">
+      <rect x="0" y="0" width="30" height="14" rx="7" fill="#4F46E5" opacity="0.7"/>
+      <rect x="15" y="0" width="15" height="14" rx="7" fill="#818cf8" opacity="0.5"/>
+    </g>
+    <!-- Capsule 3 -->
+    <g transform="translate(30, 40) rotate(-5)">
+      <rect x="0" y="0" width="30" height="14" rx="7" fill="#4F46E5" opacity="0.75"/>
+      <rect x="15" y="0" width="15" height="14" rx="7" fill="#818cf8" opacity="0.55"/>
+    </g>
+  </g>
+
+  <!-- More capsules on right -->
+  <g transform="translate(500, 480)">
+    <g transform="rotate(25)">
+      <rect x="0" y="0" width="30" height="14" rx="7" fill="#4F46E5" opacity="0.7"/>
+      <rect x="15" y="0" width="15" height="14" rx="7" fill="#818cf8" opacity="0.5"/>
+    </g>
+    <g transform="translate(40, 20) rotate(-15)">
+      <rect x="0" y="0" width="30" height="14" rx="7" fill="#4F46E5" opacity="0.65"/>
+      <rect x="15" y="0" width="15" height="14" rx="7" fill="#818cf8" opacity="0.45"/>
+    </g>
+    <g transform="translate(-10, 50) rotate(5)">
+      <rect x="0" y="0" width="30" height="14" rx="7" fill="#4F46E5" opacity="0.8"/>
+      <rect x="15" y="0" width="15" height="14" rx="7" fill="#818cf8" opacity="0.6"/>
+    </g>
+  </g>
+
+  <text x="400" y="760" text-anchor="middle" font-family="Arial" font-size="14" font-weight="700" fill="#1e1b4b" opacity="0.5">VISTA LATERAL — CAPSULAS VEGETARIANAS</text>
+</svg>

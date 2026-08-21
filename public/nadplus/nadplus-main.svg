@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8eeff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bottleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2d5a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e3a5f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="labelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8f9fc;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="8" dy="12" stdDeviation="15" flood-color="#1e3a5f" flood-opacity="0.15"/>
+    </filter>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="2" dy="4" stdDeviation="4" flood-color="#000" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="600" fill="url(#bg)" rx="16"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="600" y2="100" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="0" y1="200" x2="600" y2="200" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="0" y1="300" x2="600" y2="300" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="0" y1="400" x2="600" y2="400" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="0" y1="500" x2="600" y2="500" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="100" y1="0" x2="100" y2="600" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="600" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="300" y1="0" x2="300" y2="600" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="600" stroke="#1e3a5f" stroke-width="1"/>
+    <line x1="500" y1="0" x2="500" y2="600" stroke="#1e3a5f" stroke-width="1"/>
+  </g>
+
+  <!-- Glow behind bottle -->
+  <ellipse cx="300" cy="340" rx="140" ry="180" fill="#4F46E5" opacity="0.06"/>
+
+  <!-- === BOTTLE BODY === -->
+  <g filter="url(#shadow)" transform="translate(185, 80)">
+    <!-- Bottle shadow on surface -->
+    <ellipse cx="115" cy="420" rx="95" ry="12" fill="#1e3a5f" opacity="0.08"/>
+
+    <!-- Cap -->
+    <rect x="72" y="0" width="86" height="55" rx="8" fill="url(#capGrad)"/>
+    <rect x="75" y="8" width="80" height="6" rx="3" fill="#ffffff" opacity="0.15"/>
+    <rect x="75" y="20" width="80" height="3" rx="1.5" fill="#ffffff" opacity="0.08"/>
+
+    <!-- Neck -->
+    <rect x="80" y="55" width="70" height="30" rx="4" fill="url(#bottleGrad)"/>
+
+    <!-- Shoulder -->
+    <path d="M 60 85 Q 60 105, 45 120 L 45 120 L 185 120 Q 170 105, 170 85 Z" fill="url(#bottleGrad)"/>
+
+    <!-- Main body -->
+    <rect x="45" y="120" width="140" height="290" rx="6" fill="url(#bottleGrad)"/>
+
+    <!-- === LABEL === -->
+    <rect x="50" y="130" width="130" height="270" rx="4" fill="url(#labelGrad)" filter="url(#softShadow)"/>
+
+    <!-- Label border -->
+    <rect x="50" y="130" width="130" height="270" rx="4" fill="none" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Top accent bar -->
+    <rect x="50" y="130" width="130" height="6" rx="4" fill="#4F46E5"/>
+
+    <!-- Brand name area -->
+    <text x="115" y="158" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="700" fill="#6b7280" letter-spacing="2">NUTRIINGREDIENTS</text>
+
+    <!-- Horizontal line -->
+    <line x1="65" y1="165" x2="165" y2="165" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Product name -->
+    <text x="115" y="185" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="7" font-weight="400" fill="#6b7280">liposomal</text>
+    <text x="115" y="202" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="900" fill="#1e1b4b">NAD+</text>
+    <text x="115" y="218" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" fill="#1e1b4b">ultimate</text>
+
+    <!-- Accent line under name -->
+    <line x1="85" y1="225" x2="145" y2="225" stroke="#4F46E5" stroke-width="2"/>
+
+    <!-- Ingredients -->
+    <text x="115" y="242" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="6" fill="#6b7280">NAD+, resveratrol, R, alpha</text>
+    <text x="115" y="251" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="6" fill="#6b7280">lipoic acid &amp; glutathione</text>
+    <text x="115" y="260" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="6" fill="#6b7280">with liposomal technology</text>
+
+    <!-- Divider -->
+    <line x1="65" y1="268" x2="165" y2="268" stroke="#e2e8f0" stroke-width="1"/>
+
+    <!-- Formula badge -->
+    <rect x="78" y="275" width="74" height="22" rx="11" fill="#f0fdf4" stroke="#86efac" stroke-width="0.8"/>
+    <text x="115" y="290" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="7" font-weight="800" fill="#166534">10 IN 1 ADVANCED</text>
+
+    <!-- Dosage -->
+    <text x="115" y="312" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="900" fill="#1e1b4b">1,000mg</text>
+    <text x="115" y="324" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="6" fill="#6b7280">per serving</text>
+
+    <!-- Bottom info -->
+    <line x1="65" y1="332" x2="165" y2="332" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="115" y="346" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="5.5" fill="#9ca3af">Dietary Supplement | 60 Vegetarian Capsules</text>
+
+    <!-- Leaf icon -->
+    <g transform="translate(105, 352)" opacity="0.3">
+      <path d="M10 0 C10 0 20 5 20 15 C20 25 10 30 10 30 C10 30 0 25 0 15 C0 5 10 0 10 0Z" fill="#166534"/>
+    </g>
+  </g>
+
+  <!-- Reflection -->
+  <g opacity="0.04" transform="translate(185, 520) scale(1, -0.3)">
+    <rect x="45" y="120" width="140" height="290" rx="6" fill="#1e3a5f"/>
+  </g>
+
+  <!-- Bottom badge -->
+  <g transform="translate(300, 560)">
+    <text x="0" y="0" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" font-weight="700" fill="#1e1b4b" opacity="0.4">IMPORTHEALTH</text>
+  </g>
+</svg>
