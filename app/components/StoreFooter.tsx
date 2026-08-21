@@ -93,6 +93,12 @@ export default function StoreFooter() {
                 Prostacare
               </Link>
             </li>
+            <li>
+              <Link href="/nadplus" className="store-footer-link">
+                <ShieldCheckIcon className="h-3.5 w-3.5" />
+                NAD+ Ultimate
+              </Link>
+            </li>
           </ul>
         </div>
 

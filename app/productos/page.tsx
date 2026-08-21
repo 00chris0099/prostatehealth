@@ -95,10 +95,10 @@ export default function ProductosPage() {
                       <p className="store-category-desc">{cat.description}</p>
                     </div>
                     {cat.available ? (
-                      <span className="store-category-cta store-category-cta--available">
+                      <Link href={cat.id === "energia" ? "/nadplus" : "/productos"} className="store-category-cta">
                         {cat.productCount} producto{cat.productCount !== 1 ? "s" : ""}
                         <ChevronRightIcon className="h-3.5 w-3.5" />
-                      </span>
+                      </Link>
                     ) : (
                       <span className="store-category-soon">Próximamente</span>
                     )}
@@ -113,11 +113,11 @@ export default function ProductosPage() {
         <section className="store-section store-section--white">
           <div className="store-section-inner">
             <div className="store-section-header">
-              <span className="store-section-eyebrow">Salud Masculina</span>
-              <h2 className="store-section-title">Prostacare — Línea Completa</h2>
+              <span className="store-section-eyebrow">Todos nuestros productos</span>
+              <h2 className="store-section-title">Catálogo ImportHealth</h2>
               <p className="store-section-subtitle">
-                Escoge el tratamiento que mejor se adapta a tus metas. Todos incluyen
-                cápsulas Saw Palmetto + parches transdérmicos con tecnología de absorción dual.
+                Soluciones naturales para cada necesidad. Todos llegan a tu puerta
+                en todo el Perú con pago contra entrega.
               </p>
             </div>
 
@@ -180,11 +180,11 @@ export default function ProductosPage() {
                     </div>
 
                     <Link
-                      href="/prostacare"
+                      href={product.landingPage}
                       className="store-product-btn"
                     >
                       <CartIcon className="h-4 w-4" />
-                      Comprar Ahora
+                      Ver Oferta
                     </Link>
                   </div>
                 </article>
@@ -200,9 +200,8 @@ export default function ProductosPage() {
               <SparkleIcon className="h-10 w-10 mx-auto mb-4" style={{ color: "var(--brand-gold)" }} />
               <h2 className="store-coming-title">Más productos en camino</h2>
               <p className="store-coming-desc">
-                Estamos preparando nuevas líneas: Articulaciones y Huesos, Energía y
-                Vitalidad, y Sistema Inmune. Escríbenos por WhatsApp para ser el
-                primero en enterarte de cada lanzamiento.
+                Estamos preparando nuevas líneas: Articulaciones y Huesos y Sistema
+                Inmune. Escríbenos por WhatsApp para ser el primero en enterarte.
               </p>
               <a
                 href="https://wa.me/51935381231?text=Quiero%20saber%20cu%C3%A1ndo%20hay%20nuevos%20productos"

@@ -158,7 +158,75 @@ export default function StorePage() {
         </section>
 
         {/* ========================================================== */}
-        {/* 3. CATEGORÍAS POR SOLUCIÓN                                  */}
+        {/* 3. NUEVO LANZAMIENTO: NAD+ ULTIMATE                          */}
+        {/* ========================================================== */}
+        <section className="store-section store-section--white" style={{ background: "linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%)" }}>
+          <div className="store-section-inner">
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "2rem", alignItems: "center" }} className="md:!grid-cols-2">
+              <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                <span className="store-section-eyebrow" style={{ color: "#4F46E5" }}>
+                  <SparkleIcon className="h-3.5 w-3.5" />
+                  Nuevo Lanzamiento
+                </span>
+                <h2 style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", fontWeight: 900, color: "#1e1b4b", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+                  Liposomal NAD+ Ultimate
+                </h2>
+                <p style={{ fontSize: "0.95rem", color: "#4338ca", lineHeight: 1.65, fontWeight: 600 }}>
+                  Formula 10 en 1 con NAD+, Resveratrol, Glutation y Astaxantina.
+                  Tecnologia liposomal de alta absorcion para energia celular y longevidad.
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                  {[
+                    "10 ingredientes premium",
+                    "Capsulas vegetarianas",
+                    "1,000mg por servicio",
+                    "Tecnologia liposomal",
+                  ].map((f) => (
+                    <span key={f} style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", padding: "0.3rem 0.7rem", borderRadius: "100px", background: "rgba(79,70,229,0.1)", color: "#3730a3", fontSize: "0.75rem", fontWeight: 800 }}>
+                      <CheckCircleIcon className="h-3 w-3" />
+                      {f}
+                    </span>
+                  ))}
+                </div>
+                <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
+                  <span style={{ fontSize: "1.75rem", fontWeight: 900, color: "#1e1b4b" }}>S/ 189</span>
+                  <span style={{ fontSize: "0.9rem", color: "#94a3b8", textDecoration: "line-through", fontWeight: 700 }}>S/ 299</span>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: "0.2rem", padding: "0.2rem 0.5rem", borderRadius: "100px", background: "#fef3c7", color: "#92400e", fontSize: "0.7rem", fontWeight: 900 }}>
+                    <TagIcon className="h-3 w-3" />
+                    Ahorras S/ 110
+                  </span>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+                  <Link href="/nadplus" className="store-hero-btn-primary" style={{ background: "#4F46E5", boxShadow: "0 6px 20px rgba(79,70,229,0.35)" }}>
+                    <CartIcon className="h-5 w-5" />
+                    Ver Oferta Completa
+                  </Link>
+                </div>
+              </div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ position: "relative", width: "100%", maxWidth: "320px" }}>
+                  <div style={{ position: "absolute", inset: "-20px", borderRadius: "50%", background: "radial-gradient(circle, rgba(79,70,229,0.15) 0%, transparent 70%)", pointerEvents: "none" }} />
+                  {/* Placeholder: Imagen del frasco NAD+ Ultimate */}
+                  <div style={{ width: "100%", aspectRatio: "1", borderRadius: "1.25rem", background: "rgba(255,255,255,0.6)", border: "2px dashed rgba(79,70,229,0.3)", display: "flex", alignItems: "center", justifyContent: "center", padding: "1.5rem" }}>
+                    <div style={{ textAlign: "center" }}>
+                      <FlaskIcon className="h-16 w-16 mx-auto" style={{ color: "rgba(79,70,229,0.3)" }} />
+                      <p style={{ fontSize: "0.75rem", fontWeight: 700, color: "#4F46E5", marginTop: "0.5rem" }}>IMAGEN NAD+ ULTIMATE</p>
+                      <p style={{ fontSize: "0.65rem", color: "#6366f1", marginTop: "0.25rem" }}>Coloca aqui el frasco del producto</p>
+                    </div>
+                  </div>
+                  <div style={{ position: "absolute", bottom: "-8px", right: "-8px", background: "#1e1b4b", borderRadius: "0.75rem", padding: "0.5rem 0.85rem", display: "flex", alignItems: "center", gap: "0.35rem", boxShadow: "0 4px 16px rgba(0,0,0,0.2)", whiteSpace: "nowrap" }}>
+                    <StarIcon className="h-3.5 w-3.5 text-amber-400" />
+                    <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#fff" }}>4.9 / 5</span>
+                    <span style={{ fontSize: "0.65rem", color: "rgba(255,255,255,0.5)", fontWeight: 600 }}>(287)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================== */}
+        {/* 4. CATEGORÍAS POR SOLUCIÓN                                  */}
         {/* ========================================================== */}
         <section className="store-section store-section--light">
           <div className="store-section-inner">
