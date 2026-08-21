@@ -78,6 +78,45 @@
   animation: heartbeat 1.8s ease-in-out infinite;
 }
 
+/* Variante indigo para landing NadPlus */
+@keyframes heartbeat-indigo {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 24px -6px rgba(79, 70, 229, 0.55);
+  }
+  12% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0.12), 0 14px 30px -4px rgba(79, 70, 229, 0.6);
+  }
+  24% {
+    transform: scale(1);
+  }
+  36% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0.12), 0 14px 30px -4px rgba(79, 70, 229, 0.6);
+  }
+  48% {
+    transform: scale(1);
+  }
+}
+
+.btn-primary-cta.btn-indigo {
+  background-color: #4F46E5 !important;
+  box-shadow: 0 6px 16px -4px rgba(79, 70, 229, 0.4);
+}
+
+.btn-primary-cta.btn-indigo:hover {
+  background-color: #4338CA !important;
+}
+
+.btn-primary-cta.btn-indigo:focus {
+  ring-color: rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary-cta.btn-indigo.btn-beat {
+  animation: heartbeat-indigo 1.8s ease-in-out infinite;
+}
+
 /* Entrada de modales y aparición escalonada del hero */
 @keyframes fadeIn {
   from { opacity: 0; }
@@ -104,6 +143,20 @@
 
 .animate-hero-img {
   animation: fadeInUp 0.7s ease-out 0.15s both, float 5s ease-in-out 1.2s infinite;
+}
+
+/* ================================================================ */
+/* SCROLL REVEAL ANIMATIONS (para landing pages)                     */
+/* ================================================================ */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Notificaciones de compra en vivo (social proof) */
