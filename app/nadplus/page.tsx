@@ -62,6 +62,13 @@ const BENEFITS = [
   { title: "Estilo de Vida Saludable", desc: "Complemento ideal para quienes buscan mantenerse saludables y productivos.", icon: "star" },
 ];
 
+const HERO_SLIDES = [
+  { id: 1, label: "Vista frontal: Caja + Frasco de NAD+ Ultimate sobre fondo blanco limpio", alt: "Liposomal NAD+ Ultimate - Vista frontal" },
+  { id: 2, label: "Vista lateral: Frasco abierto mostrando capsulas vegetarianas", alt: "Liposomal NAD+ Ultimate - Capsulas" },
+  { id: 3, label: "Vista de detalle: Etiqueta con ingredientes y nutritional facts", alt: "Liposomal NAD+ Ultimate - Detalle de ingredientes" },
+  { id: 4, label: "Vifestyle: Persona activa y saludable tomando el suplemento", alt: "Liposomal NAD+ Ultimate - Uso diario" },
+];
+
 export default function NadPlusLanding() {
   const [stock, setStock] = useState(18);
   const [stockAnimated, setStockAnimated] = useState(false);
@@ -69,8 +76,48 @@ export default function NadPlusLanding() {
   const [notifIndex, setNotifIndex] = useState(0);
   const [notifState, setNotifState] = useState<"idle" | "visible" | "leaving">("idle");
   const [isCheckoutOpen] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const heroRef = useRef<HTMLDivElement>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const autoPlayRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Auto-play carousel
+  useEffect(() => {
+    const startAutoPlay = () => {
+      autoPlayRef.current = setTimeout(() => {
+        setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+        startAutoPlay();
+      }, 4000);
+    };
+    startAutoPlay();
+    return () => { if (autoPlayRef.current) clearTimeout(autoPlayRef.current); };
+  }, []);
+
+  const goToSlide = (idx: number) => {
+    setCurrentSlide(idx);
+    if (autoPlayRef.current) clearTimeout(autoPlayRef.current);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX; };
+  const handleTouchMove = (e: React.TouchEvent) => { touchEndX.current = e.touches[0].clientX; };
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
+      else setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length);
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePos({ x, y });
+  };
 
   useEffect(() => {
     if (!viewContentFired.current) {
@@ -179,18 +226,95 @@ export default function NadPlusLanding() {
           SECCION 1 - HERO
       ============================================================ */}
       <section ref={heroRef} className="min-h-[100svh] flex flex-col bg-white">
-        {/* Placeholder: Imagen grande del producto (caja + frasco de NAD+ Ultimate sobre fondo limpio) */}
-        <div className="relative w-full overflow-hidden bg-indigo-50 flex-1 flex items-center justify-center p-3 sm:p-4" style={{ minHeight: "34svh", maxHeight: "40svh" }}>
+        {/* Carrusel de imagenes del producto con zoom */}
+        <div className="relative w-full overflow-hidden bg-indigo-50 flex-1 flex flex-col items-center justify-center p-3 sm:p-4" style={{ minHeight: "38svh", maxHeight: "44svh" }}>
           <div className="absolute inset-0 bg-gradient-to-b from-indigo-50/40 via-transparent to-white pointer-events-none z-10" />
-          <div className="w-full h-full flex items-center justify-center">
-            <div className="text-center p-8 border-2 border-dashed border-indigo-300 rounded-2xl bg-indigo-50/50 max-w-sm">
-              <div className="text-4xl mb-3 text-indigo-400">
-                <FlaskIcon className="h-12 w-12 mx-auto" />
-              </div>
-              <p className="text-sm font-bold text-indigo-700">IMAGEN DEL PRODUCTO</p>
-              <p className="text-xs text-indigo-500 mt-1">Coloca aqui la imagen de la caja y frasco de Liposomal NAD+ Ultimate sobre fondo blanco o degradado suave</p>
+
+          {/* Contenedor principal del carrusel */}
+          <div
+            className="relative w-full max-w-lg mx-auto overflow-hidden rounded-2xl cursor-zoom-in"
+            onMouseEnter={() => setIsZoomed(true)}
+            onMouseLeave={() => setIsZoomed(false)}
+            onMouseMove={handleMouseMove}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="relative aspect-square transition-transform duration-500 ease-out"
+              style={
+                isZoomed
+                  ? {
+                      transform: "scale(1.8)",
+                      transformOrigin: `${mousePos.x}% ${mousePos.y}%`,
+                    }
+                  : { transform: "scale(1)" }
+              }
+            >
+              {HERO_SLIDES.map((slide, idx) => (
+                <div
+                  key={slide.id}
+                  className={`absolute inset-0 transition-opacity duration-500 ${idx === currentSlide ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+                >
+                  {/* Placeholder de imagen - reemplazar con <img> cuando tengas las fotos */}
+                  <div className="w-full h-full bg-white flex items-center justify-center p-6 border border-indigo-100">
+                    <div className="text-center">
+                      <FlaskIcon className="h-16 w-16 mx-auto text-indigo-300 mb-3" />
+                      <p className="text-xs font-bold text-indigo-600">{slide.label}</p>
+                      <p className="text-[10px] text-indigo-400 mt-1 max-w-[280px] mx-auto">
+                        Reemplaza con: &lt;img src="/nadplus/slide-{slide.id}.jpg" alt="{slide.alt}" className="w-full h-full object-contain" /&gt;
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
+
+          {/* Indicadores del carrusel (dots) */}
+          <div className="flex items-center gap-2 mt-3 z-20">
+            {HERO_SLIDES.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => goToSlide(idx)}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  idx === currentSlide
+                    ? "bg-indigo-600 w-7"
+                    : "bg-indigo-300 w-2.5 hover:bg-indigo-400"
+                }`
+                }
+                aria-label={`Imagen ${idx + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Contador de slides */}
+          <div className="absolute top-4 right-4 z-20 bg-black/40 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-full">
+            {currentSlide + 1} / {HERO_SLIDES.length}
+          </div>
+
+          {/* Flechas de navegacion (solo desktop) */}
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
+            className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 z-20 h-9 w-9 items-center justify-center rounded-full bg-white/80 backdrop-blur shadow-md text-indigo-700 hover:bg-white transition-all"
+            aria-label="Imagen anterior"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+          </button>
+          <button
+            onClick={() => setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
+            className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 z-20 h-9 w-9 items-center justify-center rounded-full bg-white/80 backdrop-blur shadow-md text-indigo-700 hover:bg-white transition-all"
+            aria-label="Imagen siguiente"
+          >
+            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+          </button>
+
+          {/* Badge de zoom en hover (desktop) */}
+          {isZoomed && (
+            <div className="absolute top-4 left-4 z-20 bg-black/40 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-full hidden sm:block">
+              Zoom: 1.8x
+            </div>
+          )}
         </div>
 
         {/* Info del producto */}
